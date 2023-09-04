@@ -1,6 +1,6 @@
 package com.example.abschlussprojekt.data.model
 
 data class PlantList(
-    val allPlants: List<Plant>
+    val results: List<Plant>
 ) {
 }
