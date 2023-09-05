@@ -4,23 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
-
+    <fragment
+        android:id="@+id/plantLexiconFragment"
+        android:name="com.example.abschlussprojekt.ui.PlantLexiconFragment"
+        android:label="PlantLexiconFragment" >
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_dailyHelpersFragment"
+            app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_cookingFragment"
+            app:destination="@id/cookingFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cookingFragment"
+        android:name="com.example.abschlussprojekt.ui.cookingFragment"
+        android:label="fragment_cooking"
+        tools:layout="@layout/fragment_cooking" >
+        <action
+            android:id="@+id/action_cookingFragment_to_dailyHelpersFragment"
+            app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_plantLexiconFragment"
+            app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyHelpersFragment"
+        android:name="com.example.abschlussprojekt.ui.dailyHelpersFragment"
+        android:label="fragment_daily_helpers"
+        tools:layout="@layout/fragment_daily_helpers" >
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_plantLexiconFragment"
+            app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_cookingFragment"
+            app:destination="@id/cookingFragment" />
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phytotherapieFragment"
+        android:name="com.example.abschlussprojekt.ui.phytotherapieFragment"
+        android:label="fragment_phytotherapie"
+        tools:layout="@layout/fragment_phytotherapie" >
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_plantLexiconFragment"
+            app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_dailyHelpersFragment"
+            app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_cookingFragment"
+            app:destination="@id/cookingFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.abschlussprojekt.ui.shopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_cookingFragment"
+            app:destination="@id/cookingFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_plantLexiconFragment"
+            app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_dailyHelpersFragment"
+            app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.abschlussprojekt.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_plantLexiconFragment"
-            app:destination="@id/plantLexiconFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/plantLexiconFragment"
-        android:name="com.example.abschlussprojekt.ui.PlantLexiconFragment"
-        android:label="fragment_plant_lexicon"
-        tools:layout="@layout/fragment_plant_lexicon" >
+            android:id="@+id/action_homeFragment_to_dailyHelpersFragment2"
+            app:destination="@id/dailyHelpersFragment" />
         <action
-            android:id="@+id/action_plantLexiconFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_homeFragment_to_cookingFragment2"
+            app:destination="@id/cookingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shopFragment2"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_plantLexiconFragment2"
+            app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_phytotherapieFragment2"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_dailyHelpersFragment3"
+            app:destination="@id/dailyHelpersFragment" />
     </fragment>
 </navigation>

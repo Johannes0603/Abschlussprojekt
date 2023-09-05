@@ -17,12 +17,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
         binding.bottomNavBar.setupWithNavController(navController)
     }
+
+    // Diese Funktion versteckt die Bottom Navigation Bar
     fun hideBottomNavigation() {
         binding.bottomNavBar.visibility = View.GONE
     }

@@ -7,21 +7,21 @@
         android:icon="@drawable/shop_btn"
         />
     <item
-        android:id="@+id/lexiconFragment"
+        android:id="@+id/plantLexiconFragment"
         android:title="lexicon"
         android:icon="@drawable/lexicon_btn"
         />
     <item
-        android:id="@+id/alltagFragment"
+        android:id="@+id/dailyHelpersFragment"
         android:title="dailyHelpers"
         android:icon="@drawable/baseline_cabin_24"/>
 
     <item
-        android:id="@+id/phytoFragment"
+        android:id="@+id/phytotherapieFragment"
         android:title="phytotherapie"
         android:icon="@drawable/phyto_btn"/>
     <item
-        android:id="@+id/cookingFragment"
+        android:id="@+id/fragment_cooking"
         android:title="cooking"
         android:icon="@drawable/cooking_btn"/>
 
