@@ -11,7 +11,7 @@ class Repository(private val api : PlantApi){
     private val _plantList = MutableLiveData<List<Plant>>()
 
 
-    val plantList : LiveData<List<Plant>>
+    val getPlantList : LiveData<List<Plant>>
         get() = _plantList
     suspend fun getPlants(term: String){
             val results = api.retrofitService.getPlant(term).results

@@ -9,13 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.abschlussprojekt.AuthViewModel
 import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.ViewModel
-import com.example.abschlussprojekt.databinding.FragmentHomeBinding
+import com.example.abschlussprojekt.databinding.FragmentLoginBinding
 
+class LoginFragment: Fragment() {
 
-class HomeFragment: Fragment() {
-
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentLoginBinding
     private val authViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -23,22 +21,37 @@ class HomeFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btLogout.setOnClickListener {
-            authViewModel.logout()
+        binding.btToRegister.setOnClickListener {
+            findNavController().navigate(R.id.registerFragment)
+        }
+
+        binding.btLogin.setOnClickListener {
+            val email: String = binding.tietEmail.text.toString()
+            val pass: String = binding.tietPass.text.toString()
+
+            if (email != "" && pass != "") {
+                authViewModel.login(email, pass)
+            }
+
         }
 
         authViewModel.currentUser.observe(viewLifecycleOwner) {
-            if (it == null) {
-                findNavController().navigate(R.id.loginFragment)
+            if (it != null) {
+                findNavController().navigate(R.id.homeFragment)
             }
         }
 
+        binding.btToReset.setOnClickListener {
+            findNavController().navigate(R.id.PWResetFragment)
+        }
+
     }
+
 }

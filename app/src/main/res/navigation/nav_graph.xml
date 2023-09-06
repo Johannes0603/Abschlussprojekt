@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/plantLexiconFragment"
         android:name="com.example.abschlussprojekt.ui.PlantLexiconFragment"
@@ -132,4 +132,19 @@
             android:id="@+id/action_homeFragment_to_dailyHelpersFragment3"
             app:destination="@id/dailyHelpersFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.abschlussprojekt.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/PWResetFragment"
+        android:name="com.example.abschlussprojekt.ui.PWResetFragment"
+        android:label="fragment_p_w_reset"
+        tools:layout="@layout/fragment_p_w_reset" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.abschlussprojekt.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>
