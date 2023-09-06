@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229672829707",
+    "project_id": "abschluogin",
+    "storage_bucket": "abschluogin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229672829707:android:e8927a0719ecafb125980e",
+        "android_client_info": {
+          "package_name": "com.example.abschlussprojekt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229672829707-id2b00jo4kd3ii2n0cdsbjsjdl0gj0lf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQHBBZF_E7FfbEFaLIHMhl-kqjnFum_Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229672829707-id2b00jo4kd3ii2n0cdsbjsjdl0gj0lf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

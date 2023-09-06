@@ -21,7 +21,7 @@
         android:title="phytotherapie"
         android:icon="@drawable/phyto_btn"/>
     <item
-        android:id="@+id/fragment_cooking"
+        android:id="@+id/cookingFragment"
         android:title="cooking"
         android:icon="@drawable/cooking_btn"/>
 
