@@ -18,14 +18,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide() // Titelleiste ausblenden
+      supportActionBar?.hide() // Titelleiste ausblenden
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
+
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.bottomNavBar.setupWithNavController(navController)
+
     }
 
     // Diese Funktion versteckt die Bottom Navigation Bar

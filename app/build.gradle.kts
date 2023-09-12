@@ -54,6 +54,7 @@ android {
 
 dependencies {
 
+    implementation("com.google.firebase:firebase-firestore-ktx:24.7.1")
     implementation("com.google.firebase:firebase-auth-ktx:22.1.1")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.core:core-ktx:1.10.1")
