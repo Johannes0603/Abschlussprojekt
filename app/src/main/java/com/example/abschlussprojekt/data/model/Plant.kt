@@ -6,9 +6,9 @@ import com.squareup.moshi.Json
 
 
 @Entity
-data class Plant (
-   // @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @Json(name = "id") var id: Int,
-    @Json(name = "common_name") var common_name: String,
-    @Json(name = "default_image") var default_image: String
+data class Plant(
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
+    @Json(name = "common_name") val commonName: String,
+    @Json(name = "scientific_name") val scientificName: String,
+    @Json(name = "image_url") val imageUrl: String
 )

@@ -41,7 +41,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_btn"
-        android:backgroundTint="#7DB2A2"
+        android:backgroundTint="#997DB2A2"
         app:layout_constraintEnd_toEndOf="@+id/btnForum"
 
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +54,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_btn"
-        android:backgroundTint="#7DB2A2"
+        android:backgroundTint="#997DB2A2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_btn"
-        android:backgroundTint="#7DB2A2"
+        android:backgroundTint="#997DB2A2"
         app:layout_constraintEnd_toEndOf="@+id/btnForum"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnForum"
@@ -79,7 +79,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:background="#7DB2A2"
+        android:background="#997DB2A2"
         app:layout_constraintBottom_toBottomOf="@+id/btnFavorites"
         app:layout_constraintEnd_toEndOf="@+id/btnFavorites"
         app:layout_constraintTop_toTopOf="@+id/btnFavorites"
@@ -151,7 +151,7 @@
             android:layout_height="60dp"
             android:hint="search"
             android:textColor="@color/black"
-            android:background="@drawable/img"/>
+            android:background="#997DB2A2"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView

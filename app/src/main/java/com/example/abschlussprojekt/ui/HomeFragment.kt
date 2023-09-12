@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.abschlussprojekt.AuthViewModel
 import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.ViewModel
 import com.example.abschlussprojekt.databinding.FragmentHomeBinding
 
 

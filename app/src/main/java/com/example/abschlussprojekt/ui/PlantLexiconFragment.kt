@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.viewModelScope
-import com.example.abschlussprojekt.ViewModel
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import com.example.abschlussprojekt.LexiconViewModel
+import com.example.abschlussprojekt.adapter.LexiconAdapter
+
 import com.example.abschlussprojekt.databinding.FragmentPlantLexiconBinding
 
 
 class PlantLexiconFragment : Fragment() {
-    private val viewModel: ViewModel by activityViewModels()
+    private val viewModel: LexiconViewModel by activityViewModels()
     private lateinit var binding: FragmentPlantLexiconBinding
+    private lateinit var adapter: LexiconAdapter
 
 
     override fun onCreateView(
@@ -25,12 +29,20 @@ class PlantLexiconFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
+        setupRecyclerView()
+        observeLexiconList()
+        viewModel.getPlants("")
 
     }
-    private fun addObserver(){
-        viewModel.viewModelScope
+
+    private fun setupRecyclerView() {
+        adapter = LexiconAdapter(emptyList(), viewModel)
+        binding.rvplantLexicon.adapter = adapter
+    }
+
+    private fun observeLexiconList() {
+        viewModel.lexiconList.observe(viewLifecycleOwner, Observer { plantList ->
+            adapter.updateData(plantList)
+        })
     }
 }

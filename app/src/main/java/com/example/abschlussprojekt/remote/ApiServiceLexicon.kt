@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val BASE_URL = "https://perenual.com/api/"
+const val BASE_URL = "https://trefle.io/api/v1/"
 
 private val moshi = Moshi.Builder()
     .add(com.squareup.moshi.KotlinJsonAdapterFactory())
@@ -19,7 +19,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ApiService{
-    @GET("species-list?page=1&key=sk-bSc364f5bf0a3c7902066")
+    @GET("plants?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
     suspend fun getPlant(@Query("term") term: String) : PlantList
 }
 object PlantApi{
