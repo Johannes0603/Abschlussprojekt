@@ -31,7 +31,7 @@ class PlantLexiconFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeLexiconList()
-        viewModel.getPlants("")
+        viewModel.getPlants("oak")
 
     }
 

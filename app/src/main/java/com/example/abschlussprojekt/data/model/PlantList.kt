@@ -1,5 +1,5 @@
 package com.example.abschlussprojekt.data.model
 
 data class PlantList(
-    val results: List<Plant>
+    val data: List<Plant>
 )

@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService{
     @GET("plants?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
-    suspend fun getPlant(@Query("term") term: String) : PlantList
+    suspend fun getPlant() : PlantList
 }
 object PlantApi{
     val retrofitService: ApiService by lazy {retrofit.create(ApiService::class.java)}
