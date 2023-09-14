@@ -33,6 +33,7 @@ class PlantLexiconFragment : Fragment() {
         observeLexiconList()
         viewModel.getPlants("oak")
 
+
     }
 
     private fun setupRecyclerView() {
