@@ -15,11 +15,10 @@
         android:layout_marginBottom="4dp"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnScanner"
+        app:layout_constraintStart_toStartOf="@+id/btnScanner"
         app:layout_constraintTop_toBottomOf="@+id/btnScanner"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.578" />
 
     <ImageButton
         android:id="@+id/dailyHint"
@@ -39,7 +38,7 @@
         android:id="@+id/btnScanner"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_btn"
         android:backgroundTint="#997DB2A2"
         app:layout_constraintEnd_toEndOf="@+id/btnForum"
@@ -52,56 +51,14 @@
         android:id="@+id/btnForum"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_btn"
         android:backgroundTint="#997DB2A2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFavorites" />
 
-    <ImageButton
-        android:id="@+id/btnFavorites"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_btn"
-        android:backgroundTint="#997DB2A2"
-        app:layout_constraintEnd_toEndOf="@+id/btnForum"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnForum"
+        app:layout_constraintEnd_toEndOf="@+id/dailyHint"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/dailyHint"
         app:layout_constraintTop_toBottomOf="@+id/dailyHint" />
-
-    <ImageButton
-        android:id="@+id/btnFav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
-        android:background="#997DB2A2"
-        app:layout_constraintBottom_toBottomOf="@+id/btnFavorites"
-        app:layout_constraintEnd_toEndOf="@+id/btnFavorites"
-        app:layout_constraintTop_toTopOf="@+id/btnFavorites"
-        app:layout_constraintVertical_bias="0.473"
-        app:srcCompat="@drawable/btn_fav_on" />
-
-    <TextView
-
-        android:id="@+id/favorites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="favorites"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnFavorites"
-        app:layout_constraintStart_toStartOf="@+id/btnFavorites"
-        app:layout_constraintTop_toTopOf="@+id/btnFavorites"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/forum"
@@ -114,9 +71,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnForum"
-        app:layout_constraintEnd_toEndOf="@+id/favorites"
-        app:layout_constraintHorizontal_bias="0.787"
-        app:layout_constraintStart_toStartOf="@+id/favorites"
+        app:layout_constraintEnd_toEndOf="@+id/btnForum"
+        app:layout_constraintStart_toStartOf="@+id/btnForum"
         app:layout_constraintTop_toTopOf="@+id/btnForum"
         app:layout_constraintVertical_bias="0.0" />
 

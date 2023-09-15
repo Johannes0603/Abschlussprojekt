@@ -3,12 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#99966044"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginLeft="4dp">
+    android:background="#99ffffff">
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,6 +17,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
          />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:text="Namemaximalmoreandmore"
-        android:textColor="#99FFFFFF"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:textSize="16dp"
         android:background="@drawable/rounded_icon"

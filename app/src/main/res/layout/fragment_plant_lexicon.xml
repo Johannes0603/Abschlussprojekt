@@ -27,11 +27,48 @@
         android:id="@+id/rvplantLexicon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saved_favorites_lexicon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/searchLexicon"
         tools:listitem="@layout/list_item" />
+
+    <ImageButton
+        android:id="@+id/saved_favorites_lexicon"
+        android:layout_width="295dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/saved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="saved favorites"
+        app:layout_constraintBottom_toBottomOf="@+id/saved_favorites_lexicon"
+        app:layout_constraintEnd_toEndOf="@+id/saved_favorites_lexicon"
+        app:layout_constraintStart_toStartOf="@+id/saved_favorites_lexicon"
+        app:layout_constraintTop_toTopOf="@+id/saved_favorites_lexicon" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/saved"
+        app:layout_constraintStart_toEndOf="@+id/saved"
+        app:layout_constraintTop_toTopOf="@+id/saved"
+        app:srcCompat="@drawable/btn_fav_on" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
