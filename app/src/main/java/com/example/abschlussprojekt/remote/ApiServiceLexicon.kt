@@ -1,11 +1,11 @@
 package com.example.abschlussprojekt.remote
 
+
 import com.example.abschlussprojekt.data.model.PlantList
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 const val BASE_URL = "https://trefle.io/api/v1/"
 
@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService{
     @GET("plants?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
-    suspend fun getPlant() : PlantList
+    suspend fun getPlant(): PlantList
 }
 object PlantApi{
     val retrofitService: ApiService by lazy {retrofit.create(ApiService::class.java)}

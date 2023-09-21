@@ -3,11 +3,9 @@ package com.example.abschlussprojekt.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.example.abschlussprojekt.data.local.PlantDataBase
 import com.example.abschlussprojekt.data.model.Plant
 import com.example.abschlussprojekt.remote.PlantApi
-import kotlinx.coroutines.runBlocking
 
 const val TAG = "AppRepositoryTAG"
 
