@@ -18,8 +18,8 @@ class Repository(private val api: PlantApi, private val dataBase: PlantDataBase)
     val getPlantList: LiveData<List<Plant>>
         get() = _plantList
 
-    suspend fun getPlants(term: String) {
-        val results = api.retrofitService.getPlant().data
+    suspend fun getPlants(term: String, page: Int) {
+        val results = api.retrofitService.getPlants(page,"QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI",term).data
         _plantList.value = results.sortedBy { it.commonName }
         Log.d("api fail","$results")
     }

@@ -147,4 +147,9 @@
         android:name="com.example.abschlussprojekt.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/plantLexiconDetailFragment"
+        android:name="com.example.abschlussprojekt.ui.PlantLexiconDetailFragment"
+        android:label="fragment_plant_lexicon_detail"
+        tools:layout="@layout/fragment_plant_lexicon_detail" />
 </navigation>

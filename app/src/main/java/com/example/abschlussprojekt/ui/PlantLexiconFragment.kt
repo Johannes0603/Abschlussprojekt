@@ -1,5 +1,6 @@
 package com.example.abschlussprojekt.ui
 
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.abschlussprojekt.LexiconViewModel
 import com.example.abschlussprojekt.adapter.LexiconAdapter
 
@@ -34,6 +37,23 @@ class PlantLexiconFragment : Fragment() {
         viewModel.getPlants("oak")
 
 
+        binding.rvplantLexicon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
+                    // Benutzer hat zum Ende der Liste gescrollt, rufe die nächste Seite ab
+                    val currentPage = totalItemCount / PAGE_SIZE + 1 // Annahme: PAGE_SIZE ist die Anzahl der Elemente pro Seite
+
+                    // Hier Daten über ViewModel abrufen
+                    viewModel.loadNextPage("oak")
+                }
+            }
+        })
     }
 
     private fun setupRecyclerView() {

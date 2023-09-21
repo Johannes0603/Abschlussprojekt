@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.abschlussprojekt.data.Repository
 import com.example.abschlussprojekt.data.local.PlantDataBase.Companion.getDataBase
@@ -16,13 +15,33 @@ import kotlinx.coroutines.launch
 class LexiconViewModel(application: Application) :
     AndroidViewModel(application) {
 
+    private val _selectedPlant = MutableLiveData<Plant>()
+    private val _currentPlant = MutableLiveData<Plant>()
+    val currentPlant: LiveData<Plant>
+        get() = _currentPlant
+    val selectedPlant: LiveData<Plant>
+        get() = _selectedPlant
+
     private val repository = Repository(PlantApi, getDataBase(application))
     val lexiconList: LiveData<List<Plant>> = repository.allPlants
 
+
+    private var currentPage = 1 // Startseite
+
     fun getPlants(term: String) {
         viewModelScope.launch {
-            repository.getPlants(term)
+            // Pflanzen für die aktuelle Seite abrufen
+            repository.getPlants(term, currentPage)
         }
+    }
+    fun detailCurrentPlant(plant: Plant){
+        _currentPlant.value = plant
+    }
+
+    // Methode zum Laden der nächsten Seite
+    fun loadNextPage(term: String) {
+        currentPage++
+        getPlants(term)
     }
 
 }

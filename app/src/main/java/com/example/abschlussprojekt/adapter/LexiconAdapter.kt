@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.abschlussprojekt.LexiconViewModel
+import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.data.model.Plant
 import com.example.abschlussprojekt.databinding.ListItemBinding
 
@@ -31,9 +33,13 @@ class LexiconAdapter(
         val binding = holder.binding
         val imgUri = item.imageUrl?.toUri()?.buildUpon()?.scheme("https")?.build()
         //binding.imageView.setImageURI(null)
-        binding.nameTextView.text = item.commonName
-        loadRoundImage(binding.imageView, imgUri) // Hier wird die Methode loadRoundImage aufgerufen
-        viewModel
+        binding.tvNameLexiconList.text = item.commonName
+        loadRoundImage(binding.ivLexiconList, imgUri) // Hier wird die Methode loadRoundImage aufgerufen
+        binding.btnListItem.setOnClickListener{
+            viewModel.detailCurrentPlant(item)
+            val navController = holder.itemView.findNavController()
+            navController.navigate(R.id.plantLexiconDetailFragment)
+        }
     }
 
     override fun getItemCount(): Int {
