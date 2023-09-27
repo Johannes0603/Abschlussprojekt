@@ -31,7 +31,7 @@ class PlantLexiconDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.selectedPlant.observe(viewLifecycleOwner){
+        viewModel.currentPlant.observe(viewLifecycleOwner){
             binding.iv1LexiconDetail.load(it.imageUrl)
             binding.iv2LexiconDetail.load(it.imageUrl)
             binding.iv3LexiconDetail.load(it.imageUrl)

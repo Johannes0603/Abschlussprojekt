@@ -7,7 +7,7 @@ class CookData {
 
 
         val recipe: List<cookRecipes> = listOf(
-            cookRecipes("1", R.drawable.img_c,false,false),
+            cookRecipes("Linsen-balls", R.drawable.linsen_ball,false,false),
             cookRecipes("2", R.drawable.img_c,false,false),
             cookRecipes("3", R.drawable.img_c,false,false),
             cookRecipes("4", R.drawable.img_c,false,false),

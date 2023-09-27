@@ -2,8 +2,11 @@ package com.example.abschlussprojekt.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.abschlussprojekt.CookingViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.ListItemBinding
 
@@ -21,11 +24,18 @@ class cookingAdapter (
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataSet[position]
         val binding = holder.binding
+        val imgUri = item.image
         binding.tvListItem.text = item.name
-        binding.ivLexiconList.setImageResource(item.image)
+        loadRoundImage(binding.ivLexiconList, imgUri)
 
 }
     override fun getItemCount(): Int {
         return dataSet.size
+    }
+    private fun loadRoundImage(imageView: ImageView, imageUrl: Int) {
+        Glide.with(imageView)
+            .load(imageUrl)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(imageView)
     }
 }
