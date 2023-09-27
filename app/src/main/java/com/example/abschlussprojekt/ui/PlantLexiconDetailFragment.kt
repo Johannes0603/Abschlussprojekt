@@ -34,8 +34,6 @@ class PlantLexiconDetailFragment : Fragment() {
         viewModel.currentPlant.observe(viewLifecycleOwner){
             binding.iv1LexiconDetail.load(it.imageUrl)
             binding.iv2LexiconDetail.load(it.imageUrl)
-            binding.iv3LexiconDetail.load(it.imageUrl)
-            binding.iv4LexiconDetail.load(it.imageUrl)
             binding.tv1LexiconDetail.text = it.commonName
             binding.tv2LexiconDetail.text = it.scientificName
         }
