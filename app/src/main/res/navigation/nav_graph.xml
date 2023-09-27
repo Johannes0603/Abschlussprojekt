@@ -23,11 +23,17 @@
         <action
             android:id="@+id/action_plantLexiconFragment_to_homeFragment2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_plantLexiconFragment_to_favoritesFragment2"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/cookingFragment"
         android:name="com.example.abschlussprojekt.ui.cookingFragment"
-        android:label="fragment_cooking"
+        android:label="cooking"
         tools:layout="@layout/fragment_cooking" >
         <action
             android:id="@+id/action_cookingFragment_to_dailyHelpersFragment"
@@ -44,11 +50,14 @@
         <action
             android:id="@+id/action_cookingFragment_to_homeFragment2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyHelpersFragment"
         android:name="com.example.abschlussprojekt.ui.dailyHelpersFragment"
-        android:label="fragment_daily_helpers"
+        android:label="daily-helpers"
         tools:layout="@layout/fragment_daily_helpers" >
         <action
             android:id="@+id/action_dailyHelpersFragment_to_phytotherapieFragment"
@@ -65,11 +74,14 @@
         <action
             android:id="@+id/action_dailyHelpersFragment_to_homeFragment2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_dailyHelpersFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/phytotherapieFragment"
         android:name="com.example.abschlussprojekt.ui.phytotherapieFragment"
-        android:label="fragment_phytotherapie"
+        android:label="phytotherapie"
         tools:layout="@layout/fragment_phytotherapie" >
         <action
             android:id="@+id/action_phytotherapieFragment_to_plantLexiconFragment"
@@ -86,11 +98,14 @@
         <action
             android:id="@+id/action_phytotherapieFragment_to_homeFragment2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopFragment"
         android:name="com.example.abschlussprojekt.ui.shopFragment"
-        android:label="fragment_shop"
+        android:label="shop"
         tools:layout="@layout/fragment_shop" >
         <action
             android:id="@+id/action_shopFragment_to_cookingFragment"
@@ -111,7 +126,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.abschlussprojekt.ui.HomeFragment"
-        android:label="fragment_home"
+        android:label="home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_dailyHelpersFragment2"
@@ -135,21 +150,44 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.abschlussprojekt.ui.LoginFragment"
-        android:label="fragment_login"
+        android:label="login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/PWResetFragment"
         android:name="com.example.abschlussprojekt.ui.PWResetFragment"
-        android:label="fragment_p_w_reset"
+        android:label="pw_reset"
         tools:layout="@layout/fragment_p_w_reset" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.abschlussprojekt.ui.RegisterFragment"
-        android:label="fragment_register"
+        android:label="register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/plantLexiconDetailFragment"
         android:name="com.example.abschlussprojekt.ui.PlantLexiconDetailFragment"
-        android:label="fragment_plant_lexicon_detail"
+        android:label="lexicon_detail"
         tools:layout="@layout/fragment_plant_lexicon_detail" />
+    <fragment
+        android:id="@+id/cookingDetailsFragment"
+        android:name="com.example.abschlussprojekt.ui.cookingDetailsFragment"
+        android:label="fragment_cooking_details"
+        tools:layout="@layout/fragment_cooking_details" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.abschlussprojekt.ui.FavoritesFragment"
+        android:label="favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_dailyHelpersFragment"
+            app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_plantLexiconFragment"
+            app:destination="@id/plantLexiconFragment" />
+    </fragment>
 </navigation>

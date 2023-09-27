@@ -26,17 +26,19 @@ android:background="@drawable/background_lexicon">
 
     <EditText
         android:id="@+id/et_search"
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginStart="8dp"
         android:autofillHints="search"
+        android:background="#997DB2A2"
         android:hint="@string/gib_hier_deinen_suchbegriff_ein"
         android:inputType="text"
         android:text="@={viewModel.inputText}"
         app:layout_constraintBottom_toTopOf="@+id/rvplantLexicon"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvplantLexicon"

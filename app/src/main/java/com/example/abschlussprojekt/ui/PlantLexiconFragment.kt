@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 
 import androidx.recyclerview.widget.SnapHelper
 import com.example.abschlussprojekt.LexiconViewModel
+import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.adapter.LexiconAdapter
 
 
@@ -51,6 +54,11 @@ class PlantLexiconFragment : Fragment() {
         }
         viewModel.lexiconList.observe(viewLifecycleOwner){
             binding.rvplantLexicon.adapter = LexiconAdapter(it,viewModel)
+        }
+        // Klick-Listener für den ImageButton hinzufügen
+        binding.savedFavoritesLexicon.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_plantLexiconFragment_to_favoritesFragment)
         }
 
 

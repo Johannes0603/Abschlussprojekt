@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-      supportActionBar?.hide() // Titelleiste ausblenden
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -28,13 +28,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.bottomNavBar.setupWithNavController(navController)
+        // Zurück-Button in der Toolbar anzeigen
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // Listener, um den Titel automatisch zu aktualisieren
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            setTitle(destination.label)
+        }
 
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                // Hier die Aktion ausführen, um zum HomeFragment zu navigieren
-                navController.navigate(R.id.homeFragment)
+                // Hier die Aktion ausführen, um zur vorherigen Seite zu navigieren
+                navController.navigateUp()
                 return true
             }
         }

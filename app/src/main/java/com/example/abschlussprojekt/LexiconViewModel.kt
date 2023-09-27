@@ -15,13 +15,11 @@ import kotlinx.coroutines.launch
 class LexiconViewModel(application: Application) :
     AndroidViewModel(application) {
 
-    private val _selectedPlant = MutableLiveData<Plant>()
     private val _currentPlant = MutableLiveData<Plant>()
     val inputText = MutableLiveData<String>()
     val currentPlant: LiveData<Plant>
         get() = _currentPlant
-    val selectedPlant: LiveData<Plant>
-        get() = _selectedPlant
+
 
     private val repository = Repository(PlantApi, getDataBase(application))
     val lexiconList = repository.allPlants

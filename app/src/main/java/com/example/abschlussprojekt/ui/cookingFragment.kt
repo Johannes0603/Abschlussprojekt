@@ -14,7 +14,9 @@ import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.adapter.cookingAdapter
 import com.example.abschlussprojekt.databinding.FragmentCookingBinding
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.abschlussprojekt.R
 
 
 class cookingFragment : Fragment() {
@@ -52,6 +54,11 @@ class cookingFragment : Fragment() {
             }
         })
         addObserver()
+        // Klick-Listener für den ImageButton hinzufügen
+        binding.savedFavoritesCooking.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_cookingFragment_to_favoritesFragment)
+        }
 
 
 
