@@ -2,4 +2,5 @@
     <string name="app_name">Abschlussprojekt</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gib_hier_deinen_suchbegriff_ein">Gib hier deinen Suchbegriff ein</string>
 </resources>

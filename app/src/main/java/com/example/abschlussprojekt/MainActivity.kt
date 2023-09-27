@@ -2,6 +2,7 @@ package com.example.abschlussprojekt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -28,6 +29,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.bottomNavBar.setupWithNavController(navController)
 
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Hier die Aktion ausführen, um zum HomeFragment zu navigieren
+                navController.navigate(R.id.homeFragment)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // Diese Funktion versteckt die Bottom Navigation Bar

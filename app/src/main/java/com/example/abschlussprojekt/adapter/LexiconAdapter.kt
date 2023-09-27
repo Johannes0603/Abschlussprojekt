@@ -33,7 +33,7 @@ class LexiconAdapter(
         val binding = holder.binding
         val imgUri = item.imageUrl?.toUri()?.buildUpon()?.scheme("https")?.build()
         //binding.imageView.setImageURI(null)
-        binding.tvNameLexiconList.text = item.commonName
+        binding.tvListItem.text = item.commonName
         loadRoundImage(binding.ivLexiconList, imgUri) // Hier wird die Methode loadRoundImage aufgerufen
         binding.btnListItem.setOnClickListener{
             viewModel.detailCurrentPlant(item)

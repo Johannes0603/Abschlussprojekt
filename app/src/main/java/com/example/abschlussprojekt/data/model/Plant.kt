@@ -10,8 +10,8 @@ data class Plant(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @Json(name = "common_name") val commonName: String?,
     @Json(name = "scientific_name") val scientificName: String?,
-    @Json(name = "image_url") val imageUrl: String?
+    @Json(name = "image_url") val imageUrl: String?,
     //@Json(name = "links") val links: String,
-    //@Json(name = "next") val next : String?,
-    //@Json(name = "prev") val prev : String?
+    @Json(name = "next") val next : String?,
+    @Json(name = "prev") val prev : String?
 )

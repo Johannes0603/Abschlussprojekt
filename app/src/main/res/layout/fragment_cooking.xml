@@ -1,21 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.cookingFragment"
-    android:background="@drawable/background_cooking">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.abschlussprojekt.CookingViewModel" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".ui.cookingFragment"
+        android:background="@drawable/background_cooking">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCooking"
+            android:layout_width="411dp"
+            android:layout_height="535dp"
+            android:layout_marginTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:listitem="@layout/list_item" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="412dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:autofillHints="search"
+            android:hint="@string/gib_hier_deinen_suchbegriff_ein"
+            android:inputType="text"
+            android:text="@={viewModel.inputText}"
+            app:layout_constraintBottom_toTopOf="@+id/rvCooking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/saved_favorites_cooking"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvCooking" />
+
+        <TextView
+            android:id="@+id/saved"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="search"
-            android:background="#997DB2A2"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="saved favorites"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/saved_favorites_cooking"
+            app:layout_constraintEnd_toEndOf="@+id/rvCooking"
+            app:layout_constraintHorizontal_bias="0.008"
+            app:layout_constraintStart_toStartOf="@+id/saved_favorites_cooking"
+            app:layout_constraintTop_toTopOf="@+id/saved_favorites_cooking"
+            app:layout_constraintVertical_bias="0.09" />
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/favstar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/saved"
+            app:layout_constraintStart_toEndOf="@+id/saved"
+            app:layout_constraintTop_toTopOf="@+id/saved"
+            app:srcCompat="@drawable/btn_fav_on" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

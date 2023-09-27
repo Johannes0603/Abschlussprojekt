@@ -1,60 +1,67 @@
 package com.example.abschlussprojekt.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.abschlussprojekt.R
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
+import com.example.abschlussprojekt.CookingViewModel
+import com.example.abschlussprojekt.adapter.cookingAdapter
+import com.example.abschlussprojekt.databinding.FragmentCookingBinding
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [cookingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class cookingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentCookingBinding
+    private lateinit var adapter: cookingAdapter
+    private val viewModel: CookingViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cooking, container, false)
+        binding = FragmentCookingBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment cookingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            cookingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Der SnapHelper sorgt dafür, dass die RecyclerView immer auf das aktuelle List Item springt
+        val helper: SnapHelper = PagerSnapHelper()
+        helper.attachToRecyclerView(binding.rvCooking)
+        binding.viewModel = viewModel
+        val recView = binding.rvCooking
+        recView.setHasFixedSize(true)
+        // Setze das Layout für die RecyclerView
+        //recView.layoutManager = LinearLayoutManager(context)
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.inputText.value = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+        addObserver()
+
+
+
     }
+
+    fun addObserver(){
+        viewModel.allRecipes.observe(viewLifecycleOwner,Observer{
+            binding.rvCooking.adapter = cookingAdapter(it)
+        })
+    }
+
+
 }

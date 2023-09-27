@@ -26,6 +26,9 @@ interface ApiService{
         @Query("token") token: String,
         @Query("term") term: String
     ): PlantList
+
+    @GET("plants/search?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
+    suspend fun getPlantsSearch(@Query("token") token: String,@Query("term") term: String) : PlantList
 }
 
 object PlantApi{

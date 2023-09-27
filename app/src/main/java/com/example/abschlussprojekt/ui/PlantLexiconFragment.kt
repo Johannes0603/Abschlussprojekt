@@ -10,9 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.PagerSnapHelper
+
+import androidx.recyclerview.widget.SnapHelper
 import com.example.abschlussprojekt.LexiconViewModel
 import com.example.abschlussprojekt.adapter.LexiconAdapter
+
 
 import com.example.abschlussprojekt.databinding.FragmentPlantLexiconBinding
 
@@ -32,12 +35,26 @@ class PlantLexiconFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        observeLexiconList()
-        viewModel.getPlants("oak")
+        // Der SnapHelper sorgt dafür, dass die RecyclerView immer auf das aktuelle List Item springt
+        val helper: SnapHelper = PagerSnapHelper()
+        helper.attachToRecyclerView(binding.rvplantLexicon)
+        binding.viewModel = viewModel
+        val recView = binding.rvplantLexicon
+        recView.setHasFixedSize(true)
+        addObserver()
+
+       // setupRecyclerView()
+        //observeLexiconList()
+       // viewModel.getPlants("oak")
+        viewModel.inputText.observe(viewLifecycleOwner){
+            viewModel.getResult(it)
+        }
+        viewModel.lexiconList.observe(viewLifecycleOwner){
+            binding.rvplantLexicon.adapter = LexiconAdapter(it,viewModel)
+        }
 
 
-        binding.rvplantLexicon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+       /* binding.rvplantLexicon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -47,13 +64,13 @@ class PlantLexiconFragment : Fragment() {
 
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
                     // Benutzer hat zum Ende der Liste gescrollt, rufe die nächste Seite ab
-                    val currentPage = totalItemCount / PAGE_SIZE + 1 // Annahme: PAGE_SIZE ist die Anzahl der Elemente pro Seite
+                   // val currentPage = totalItemCount / PAGE_SIZE + 10 // Annahme: PAGE_SIZE ist die Anzahl der Elemente pro Seite
 
                     // Hier Daten über ViewModel abrufen
                     viewModel.loadNextPage("oak")
                 }
             }
-        })
+        })*/
     }
 
     private fun setupRecyclerView() {
@@ -61,9 +78,14 @@ class PlantLexiconFragment : Fragment() {
         binding.rvplantLexicon.adapter = adapter
     }
 
-    private fun observeLexiconList() {
+    /*private fun observeLexiconList() {
         viewModel.lexiconList.observe(viewLifecycleOwner, Observer { plantList ->
             adapter.updateData(plantList)
+        })
+    }*/
+    private fun addObserver(){
+        viewModel.lexiconList.observe(viewLifecycleOwner, Observer {
+            binding.rvplantLexicon.adapter = LexiconAdapter(it,viewModel)
         })
     }
 }

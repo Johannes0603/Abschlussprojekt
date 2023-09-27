@@ -17,16 +17,19 @@ class LexiconViewModel(application: Application) :
 
     private val _selectedPlant = MutableLiveData<Plant>()
     private val _currentPlant = MutableLiveData<Plant>()
+    val inputText = MutableLiveData<String>()
     val currentPlant: LiveData<Plant>
         get() = _currentPlant
     val selectedPlant: LiveData<Plant>
         get() = _selectedPlant
 
     private val repository = Repository(PlantApi, getDataBase(application))
-    val lexiconList: LiveData<List<Plant>> = repository.allPlants
+    val lexiconList = repository.allPlants
 
 
     private var currentPage = 1 // Startseite
+
+
 
     fun getPlants(term: String) {
         viewModelScope.launch {
@@ -42,6 +45,12 @@ class LexiconViewModel(application: Application) :
     fun loadNextPage(term: String) {
         currentPage++
         getPlants(term)
+    }
+
+    fun getResult(term: String){
+        viewModelScope.launch {
+            repository.getPlantsSearch(term)
+        }
     }
 
 }

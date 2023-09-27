@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_height="match_parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +23,8 @@
 
         <ImageView
             android:id="@+id/iv1LexiconDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="67dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/iv3LexiconDetail"
@@ -37,8 +36,8 @@
 
         <ImageView
             android:id="@+id/iv3LexiconDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="44dp"
@@ -49,8 +48,8 @@
 
         <ImageView
             android:id="@+id/iv4LexiconDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginEnd="107dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv3LexiconDetail"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,8 +90,8 @@
 
         <ImageView
             android:id="@+id/iv2LexiconDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="67dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/iv4LexiconDetail"
@@ -102,4 +101,4 @@
             tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+</com.google.android.material.card.MaterialCardView>
