@@ -28,10 +28,12 @@
 
         <ImageView
             android:id="@+id/iv1LexiconDetail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="67dp"
             app:layout_constraintEnd_toStartOf="@+id/iv2LexiconDetail"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
@@ -39,9 +41,12 @@
             android:id="@+id/tv1LexiconDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="28dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv2LexiconDetail" />
 
@@ -49,9 +54,12 @@
             android:id="@+id/tv2LexiconDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv1LexiconDetail" />
 
@@ -67,13 +75,14 @@
 
         <ImageView
             android:id="@+id/iv2LexiconDetail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
             android:layout_marginTop="67dp"
-            android:layout_marginEnd="107dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv1LexiconDetail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
