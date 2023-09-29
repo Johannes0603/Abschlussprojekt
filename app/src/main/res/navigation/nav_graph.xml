@@ -189,5 +189,41 @@
         <action
             android:id="@+id/action_favoritesFragment_to_plantLexiconFragment"
             app:destination="@id/plantLexiconFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_cookingFavoritesFragment"
+            app:destination="@id/cookingFavoritesFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_phytoFavoritesFragment"
+            app:destination="@id/phytoFavoritesFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_lexiconFavoritesFragment"
+            app:destination="@id/lexiconFavoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cookingFavoritesFragment"
+        android:name="com.example.abschlussprojekt.ui.cookingFavoritesFragment"
+        android:label="fragment_cooking_favorites"
+        tools:layout="@layout/fragment_cooking_favorites" >
+        <action
+            android:id="@+id/action_cookingFavoritesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lexiconFavoritesFragment"
+        android:name="com.example.abschlussprojekt.ui.LexiconFavoritesFragment"
+        android:label="fragment_lexicon_favorites"
+        tools:layout="@layout/fragment_lexicon_favorites" >
+        <action
+            android:id="@+id/action_lexiconFavoritesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phytoFavoritesFragment"
+        android:name="com.example.abschlussprojekt.ui.phytoFavoritesFragment"
+        android:label="fragment_phyto_favorites"
+        tools:layout="@layout/fragment_phyto_favorites" >
+        <action
+            android:id="@+id/action_phytoFavoritesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 </navigation>
