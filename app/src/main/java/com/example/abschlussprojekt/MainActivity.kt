@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.abschlussprojekt.data.db.RecipeRepository
 import com.example.abschlussprojekt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             setTitle(destination.label)
         }
+        // Zugriff auf das Repository um mit der Datenbank arbeiten zu können
+        val repository = RecipeRepository.getInstance(this)
+        repository.prepopulateDB()
 
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
