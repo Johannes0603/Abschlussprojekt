@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.abschlussprojekt.AuthViewModel
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.databinding.FragmentFavoritesBinding
@@ -29,6 +30,19 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnCookingFav.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_favoritesFragment_to_cookingFavoritesFragment)
+        }
+        binding.btnPhytoFav.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_favoritesFragment_to_phytoFavoritesFragment)
+        }
+        binding.btnLexFav.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_favoritesFragment_to_lexiconFavoritesFragment)
+        }
     }
 
 
