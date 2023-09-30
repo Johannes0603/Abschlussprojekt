@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.abschlussprojekt.data.CookData
+import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.exampleData.CookData
 import com.example.abschlussprojekt.data.model.cookRecipes
 
 class CookingViewModel (application: Application) :
@@ -13,6 +14,9 @@ class CookingViewModel (application: Application) :
         private val repository = CookData()
     val inputText = MutableLiveData<String>()
     val cookingList = repository.recipe
+    private val _currentRecipe = MutableLiveData<RecipeData>()
+    val currentRecipe: LiveData<RecipeData>
+        get() = _currentRecipe
 
     private val _allRecipes = MutableLiveData<List<cookRecipes>>(cookingList)
     val allRecipes: MutableLiveData<List<cookRecipes>>
@@ -32,6 +36,9 @@ class CookingViewModel (application: Application) :
             }
             _allRecipes.value = filteredRecipes
         }
+    }
+    fun detailCurrentRecipe(recipe: RecipeData){
+        _currentRecipe.value = recipe
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.abschlussprojekt.data.local
+package com.example.abschlussprojekt.data.dbPlants
 
 import android.content.Context
 import androidx.room.Database

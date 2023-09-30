@@ -66,7 +66,7 @@ class cookingFragment : Fragment() {
 
     fun addObserver(){
         viewModel.allRecipes.observe(viewLifecycleOwner,Observer{
-            binding.rvCooking.adapter = cookingAdapter(it)
+            binding.rvCooking.adapter = cookingAdapter(it,viewModel)
         })
     }
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.abschlussprojekt.data.Repository
-import com.example.abschlussprojekt.data.local.PlantDataBase.Companion.getDataBase
+import com.example.abschlussprojekt.data.dbPlants.PlantDataBase.Companion.getDataBase
 
 import com.example.abschlussprojekt.data.model.Plant
 import com.example.abschlussprojekt.remote.PlantApi

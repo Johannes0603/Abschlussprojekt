@@ -14,4 +14,8 @@ data class Plant(
     //@Json(name = "links") val links: String,
     @Json(name = "next") var next : String?,
     @Json(name = "prev") var prev : String?
-)
+){
+    var liked: Boolean = false
+    var dislike: Boolean = false
+
+}

@@ -3,7 +3,7 @@ package com.example.abschlussprojekt.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.abschlussprojekt.data.local.PlantDataBase
+import com.example.abschlussprojekt.data.dbPlants.PlantDataBase
 import com.example.abschlussprojekt.data.model.Plant
 import com.example.abschlussprojekt.remote.PlantApi
 

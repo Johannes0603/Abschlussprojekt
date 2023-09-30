@@ -9,5 +9,8 @@ data class RecipeData(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var title: String,
-    var info: String
+    var info: String,
+    var image: Int,
+    var like: Boolean = false,
+    var dislike: Boolean = false
 )

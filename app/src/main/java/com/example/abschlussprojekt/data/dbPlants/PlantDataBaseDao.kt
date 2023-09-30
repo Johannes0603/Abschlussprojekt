@@ -1,4 +1,4 @@
-package com.example.abschlussprojekt.data.local
+package com.example.abschlussprojekt.data.dbPlants
 
 import androidx.room.Dao
 import androidx.room.Query
