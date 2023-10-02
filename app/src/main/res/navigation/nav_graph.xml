@@ -146,6 +146,9 @@
         <action
             android:id="@+id/action_homeFragment_to_dailyHelpersFragment3"
             app:destination="@id/dailyHelpersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -225,5 +228,26 @@
         <action
             android:id="@+id/action_phytoFavoritesFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.abschlussprojekt.ui.QuizFragment"
+        android:label="QuizFragment"
+        tools:layout="@layout/fragment_quiz">
+        <action
+            android:id="@+id/action_quizFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.abschlussprojekt.ui.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
 </navigation>

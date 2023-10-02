@@ -1,0 +1,62 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".QuestionAdapter">
+
+        <!-- Frage-Text -->
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Bild der Pflanze -->
+        <ImageView
+            android:id="@+id/plantImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/img_c" /> <!-- Setze das Standardbild hier -->
+
+        <!-- Antwortmöglichkeiten -->
+        <RadioGroup
+            android:id="@+id/answerOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/option1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" /> <!-- Hier wird der Pflanzenname für Option 1 angezeigt -->
+
+            <RadioButton
+                android:id="@+id/option2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" /> <!-- Hier wird der Pflanzenname für Option 2 angezeigt -->
+
+            <RadioButton
+                android:id="@+id/option3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" /> <!-- Hier wird der Pflanzenname für Option 3 angezeigt -->
+
+            <RadioButton
+                android:id="@+id/option4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" /> <!-- Hier wird der Pflanzenname für Option 4 angezeigt -->
+        </RadioGroup>
+    </LinearLayout>
+</layout>

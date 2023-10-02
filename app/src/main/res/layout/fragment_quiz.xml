@@ -1,0 +1,63 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".QuizFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/resultsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/totalQuestionsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gesamtzahl der Fragen:"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/correctAnswersTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Richtige Antworten:"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/restartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quiz Neustarten"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/showResultsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ergebnisse anzeigen"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

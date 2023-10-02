@@ -32,6 +32,9 @@ class HomeFragment: Fragment() {
         binding.btLogout.setOnClickListener {
             authViewModel.logout()
         }
+        binding.BtnQuiz.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_quizFragment)
+        }
 
         authViewModel.currentUser.observe(viewLifecycleOwner) {
             if (it == null) {
