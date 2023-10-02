@@ -1,5 +1,6 @@
 package com.example.abschlussprojekt.ui
 
+import QuizViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,26 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.ViewModelPackage.QuizViewModel
 import com.example.abschlussprojekt.adapter.QuestionAdapter
-import com.example.abschlussprojekt.data.exampleData.QuizPlant
+
+import com.example.abschlussprojekt.data.exampleData.plantListQuiz
+
 import com.example.abschlussprojekt.databinding.FragmentQuizBinding
 
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private lateinit var questionAdapter: QuestionAdapter
     private lateinit var viewModel: QuizViewModel
-    private val plantList: List<QuizPlant> = listOf(
-        QuizPlant("einstellungen", R.drawable.setting_btn),
-        QuizPlant("C", R.drawable.img_c),
-        QuizPlant("linse", R.drawable.linsen_ball),
-        QuizPlant("rechts", R.drawable.arrow_right),
-        QuizPlant("home", R.drawable.home_btn),
-        QuizPlant("off", R.drawable.btn_fav_off),
-        QuizPlant("scan", R.drawable.btn_scan),
-        QuizPlant("cook", R.drawable.cooking_btn),
-        QuizPlant("lex", R.drawable.lexicon_btn)
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,34 +51,21 @@ class QuizFragment : Fragment() {
 
         // Button-Click-Listener für das Anzeigen der Ergebnisse
         binding.showResultsButton.setOnClickListener {
-            showResults()
+            if (viewModel.isQuizComplete()) {
+                findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
+            } else {
+                // Wenn das Quiz noch nicht abgeschlossen ist, zeige eine Nachricht an oder tue nichts
+            }
         }
-        // Immer das Quiz starten, wenn das Fragment geladen wird
-        startQuiz()
     }
 
     private fun startQuiz() {
         // Frage-Liste generieren, indem du die plantList an die generateQuestions-Funktion übergibst
-        val questions = viewModel.generateQuestions(plantList)
+        val questions = viewModel.generateQuestions(plantListQuiz)
 
         // RecyclerView initialisieren
         questionAdapter = QuestionAdapter(questions, viewModel)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = questionAdapter
-    }
-
-    private fun showResults() {
-        // Verstecke den RecyclerView und zeige die Ergebnisse an
-        binding.recyclerView.visibility = View.GONE
-        binding.resultsLayout.visibility = View.VISIBLE
-        binding.showResultsButton.visibility = View.GONE // Verstecke den "Ergebnisse anzeigen"-Button
-
-        // Hier kannst du die Ergebnisse von QuizViewModel abrufen
-        val totalQuestions = viewModel.getTotalQuestions()
-        val correctAnswers = viewModel.getCorrectAnswers()
-
-        // Setze die Textfelder mit den Ergebnissen
-        binding.totalQuestionsTextView.text = "Gesamtzahl der Fragen: $totalQuestions"
-        binding.correctAnswersTextView.text = "Richtige Antworten: $correctAnswers"
     }
 }

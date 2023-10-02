@@ -1,8 +1,8 @@
 package com.example.abschlussprojekt.adapter
+import QuizViewModel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.abschlussprojekt.ViewModelPackage.QuizViewModel
 import com.example.abschlussprojekt.data.model.Question
 import com.example.abschlussprojekt.databinding.ItemQuestionBinding
 

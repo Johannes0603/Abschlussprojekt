@@ -21,4 +21,10 @@
         android:layout_height="wrap_content"
         android:text="Gesamtzahl der Fragen: 0" />
 
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Neustarten" />
+
 </LinearLayout>
