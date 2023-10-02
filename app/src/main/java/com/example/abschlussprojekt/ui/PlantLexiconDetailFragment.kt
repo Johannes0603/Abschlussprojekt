@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.abschlussprojekt.LexiconViewModel
+import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.databinding.FragmentPlantLexiconDetailBinding
 
 
@@ -35,6 +37,16 @@ class PlantLexiconDetailFragment : Fragment() {
             binding.iv1LexiconDetail.load(it.imageUrl)
             binding.tv1LexiconDetail.text = it.commonName
             binding.tv2LexiconDetail.text = it.scientificName
+        }
+        val toggleButton = binding.toggleButton
+        toggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                // Wenn der ToggleButton ausgewählt ist (ausgefüllter Stern), ändere das Hintergrundbild
+                buttonView.setBackgroundResource(R.drawable.btn_fav_on)
+            } else {
+                // Wenn der ToggleButton nicht ausgewählt ist (leerer Stern), ändere das Hintergrundbild
+                buttonView.setBackgroundResource(R.drawable.btn_fav_off)
+            }
         }
     }
 }
