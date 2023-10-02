@@ -11,11 +11,12 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.R
+import com.example.abschlussprojekt.data.dataclass.RecipeData
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.ListItemBinding
 
 class cookingAdapter (
-    private var dataSet: List<cookRecipes>,
+    private var dataSet: List<RecipeData>,
     private val viewModel: CookingViewModel
 ) : RecyclerView.Adapter<cookingAdapter.ItemViewHolder>() {
 
@@ -30,7 +31,7 @@ class cookingAdapter (
         val item = dataSet[position]
         val binding = holder.binding
         val imgUri = item.image
-        binding.tvListItem.text = item.name
+        binding.tvListItem.text = item.title
         loadRoundImage(binding.ivLexiconList, imgUri)
 
 

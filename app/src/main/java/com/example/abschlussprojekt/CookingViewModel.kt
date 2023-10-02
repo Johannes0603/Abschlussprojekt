@@ -18,8 +18,8 @@ class CookingViewModel (application: Application) :
     val currentRecipe: LiveData<RecipeData>
         get() = _currentRecipe
 
-    private val _allRecipes = MutableLiveData<List<cookRecipes>>(cookingList)
-    val allRecipes: MutableLiveData<List<cookRecipes>>
+    private val _allRecipes = MutableLiveData<List<RecipeData>>(cookingList)
+    val allRecipes: MutableLiveData<List<RecipeData>>
         get()= _allRecipes
     init {
         inputText.observeForever { searchText ->
@@ -32,7 +32,7 @@ class CookingViewModel (application: Application) :
             _allRecipes.value = cookingList
         } else {
             val filteredRecipes = cookingList.filter { recipe ->
-                recipe.name.contains(searchText, ignoreCase = true)
+                recipe.title.contains(searchText, ignoreCase = true)
             }
             _allRecipes.value = filteredRecipes
         }
