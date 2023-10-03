@@ -1,6 +1,7 @@
 package com.example.abschlussprojekt.ui
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,8 +29,8 @@ class cookingDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.currentRecipe.observe(viewLifecycleOwner, { recipe ->
             // Hier setzt du die Daten in die Ansichtselemente
-            binding.tvRecipeName.text = recipe.title
-            binding.tvRecipe.text = recipe.info
+            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(recipe.title)
+            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(recipe.info)
             binding.imgCoverDetail.load(recipe.image)
         })
 
