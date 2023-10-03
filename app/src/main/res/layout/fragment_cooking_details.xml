@@ -21,36 +21,70 @@
 
     <TextView
         android:id="@+id/tvRecipeName"
+        android:background="@color/white"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="32dp"
         android:layout_marginStart="94dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="98dp"
         android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintEnd_toEndOf="@+id/img_cover_detail"
         app:layout_constraintStart_toStartOf="@+id/img_cover_detail"
         app:layout_constraintTop_toBottomOf="@+id/img_cover_detail" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
         android:backgroundTint="#997DB2A2"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/tvRecipe"
-        app:layout_constraintStart_toStartOf="@+id/tvRecipe"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecipe" />
+        android:text="EDIT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipe" />
 
-    <TextView
-        android:id="@+id/tvRecipe"
+    <ScrollView
+        android:id="@+id/sv_tv_recipe"
+        android:background="@color/white"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="@+id/tvRecipeName"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/tvRecipeName"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecipeName">
+
+        <TextView
+            android:id="@+id/tvRecipe"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TextView"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/tvRecipeName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvRecipeName"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecipeName" />
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="79dp"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

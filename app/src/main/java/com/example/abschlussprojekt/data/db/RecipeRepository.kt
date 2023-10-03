@@ -24,20 +24,9 @@ class RecipeRepository(private val database: RecipeDatabase) {
                 Repository = it
             }
 
-
-        /**
-         * Lokale Funktion um ein Repository zu erstellen
-         *
-         * @param shoppingListDatabase    Die Datenbank mit der das Repo verknüpft werden soll
-         *
-         * @return Ein Repository
-         */
         private fun buildRepo(cookingListDatabase: RecipeDatabase): RecipeRepository =
             RecipeRepository(cookingListDatabase)
     }
-    /**
-     * Funktion um Beispielwerte und Daten von der API bei leerer Datenbank in diese einzufügen
-     */
     fun prepopulateDB(){
         try{
             if(database.library.getCount() == 0){

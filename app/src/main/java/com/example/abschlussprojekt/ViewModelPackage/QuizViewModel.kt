@@ -19,7 +19,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
     fun generateQuestions(plantList: List<QuizPlant>): List<Question> {
         val questions = mutableListOf<Question>()
-        val usedPlants = mutableSetOf<String>() // Hier speichern wir die Namen der Pflanzen, die bereits verwendet wurden
+        val usedPlants = mutableSetOf<String>() // Hier speichern der Namen der Pflanzen, die bereits verwendet wurden
 
         while (questions.size < 9) {
             val randomPlant = plantList.random()

@@ -7,19 +7,18 @@ import androidx.lifecycle.MutableLiveData
 import com.example.abschlussprojekt.data.dataclass.RecipeData
 import com.example.abschlussprojekt.data.exampleData.CookData
 
-class CookingViewModel (application: Application) :
-    AndroidViewModel(application) {
 
-        private val repository = CookData()
+class CookingViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository = CookData()
     val inputText = MutableLiveData<String>()
-    val cookingList = repository.recipe
+    val cookingList = repository.recipes
     private val _currentRecipe = MutableLiveData<RecipeData>()
     val currentRecipe: LiveData<RecipeData>
         get() = _currentRecipe
 
-    private val _allRecipes = MutableLiveData<List<RecipeData>>(cookingList)
-    val allRecipes: MutableLiveData<List<RecipeData>>
-        get()= _allRecipes
+    val allRecipes: LiveData<List<RecipeData>> = MutableLiveData<List<RecipeData>>(cookingList)
+
     init {
         inputText.observeForever { searchText ->
             filterRecipes(searchText)
@@ -28,16 +27,27 @@ class CookingViewModel (application: Application) :
 
     private fun filterRecipes(searchText: String?) {
         if (searchText.isNullOrBlank()) {
-            _allRecipes.value = cookingList
+            (allRecipes as MutableLiveData).value = cookingList
         } else {
             val filteredRecipes = cookingList.filter { recipe ->
                 recipe.title.contains(searchText, ignoreCase = true)
             }
-            _allRecipes.value = filteredRecipes
+            (allRecipes as MutableLiveData).value = filteredRecipes
         }
     }
-    fun detailCurrentRecipe(recipe: RecipeData){
+
+    fun detailCurrentRecipe(recipe: RecipeData) {
         _currentRecipe.value = recipe
     }
 
+    fun updateRecipe(updatedRecipe: RecipeData) {
+        repository.updateRecipe(updatedRecipe)
+        // Hier aktualisieren wir die Liste der Rezepte direkt in der LiveData
+        val updatedList = (allRecipes.value ?: emptyList()).toMutableList()
+        val index = updatedList.indexOfFirst { it.id == updatedRecipe.id }
+        if (index != -1) {
+            updatedList[index] = updatedRecipe
+            (allRecipes as MutableLiveData).value = updatedList
+        }
+    }
 }
