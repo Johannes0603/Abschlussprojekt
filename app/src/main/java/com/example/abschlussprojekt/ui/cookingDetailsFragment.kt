@@ -7,11 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.abschlussprojekt.CookingViewModel
-import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.databinding.FragmentCookingBinding
 import com.example.abschlussprojekt.databinding.FragmentCookingDetailsBinding
-import com.example.abschlussprojekt.databinding.FragmentFavoritesBinding
-import com.example.abschlussprojekt.databinding.FragmentPlantLexiconDetailBinding
 
 
 class cookingDetailsFragment : Fragment() {

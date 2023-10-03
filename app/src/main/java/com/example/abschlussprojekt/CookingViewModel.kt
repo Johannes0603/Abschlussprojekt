@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.abschlussprojekt.data.dataclass.RecipeData
 import com.example.abschlussprojekt.data.exampleData.CookData
-import com.example.abschlussprojekt.data.model.cookRecipes
 
 class CookingViewModel (application: Application) :
     AndroidViewModel(application) {

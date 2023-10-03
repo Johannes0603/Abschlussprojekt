@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ import com.example.abschlussprojekt.databinding.FragmentQuizBinding
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private lateinit var questionAdapter: QuestionAdapter
-    private lateinit var viewModel: QuizViewModel
+    private val viewModel: QuizViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +33,7 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(QuizViewModel::class.java)
-
-        // Überprüfe, ob das Quiz bereits abgeschlossen wurde
-        if (viewModel.isQuizComplete()) {
-            // Wenn das Quiz abgeschlossen ist, zeige den "Ergebnisse anzeigen"-Button
-            binding.showResultsButton.visibility = View.VISIBLE
-        } else {
-            // Wenn das Quiz noch nicht abgeschlossen ist, generiere Fragen und starte das Quiz
-            startQuiz()
-        }
+        startQuiz() // Starten Sie das Quiz, unabhängig davon, ob es bereits abgeschlossen ist
 
         // Button-Click-Listener für den Neustart des Spiels
         binding.restartButton.setOnClickListener {
@@ -51,16 +43,17 @@ class QuizFragment : Fragment() {
 
         // Button-Click-Listener für das Anzeigen der Ergebnisse
         binding.showResultsButton.setOnClickListener {
-            if (viewModel.isQuizComplete()) {
-                findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
-            } else {
-                // Wenn das Quiz noch nicht abgeschlossen ist, zeige eine Nachricht an oder tue nichts
-            }
+            val totalQuestions = viewModel.totalQuestions.value ?: 0
+            val correctAnswers = viewModel.correctAnswers.value ?: 0
+            val answeredQuestions = viewModel.answeredQuestions.value ?: mutableListOf()
+            viewModel.updateQuizStats(totalQuestions, correctAnswers, answeredQuestions)
+            findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
         }
     }
 
+
     private fun startQuiz() {
-        // Frage-Liste generieren, indem du die plantList an die generateQuestions-Funktion übergibst
+        // Frage-Liste generieren, indem die plantList an die generateQuestions-Funktion übergeben wird
         val questions = viewModel.generateQuestions(plantListQuiz)
 
         // RecyclerView initialisieren

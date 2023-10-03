@@ -1,9 +1,14 @@
+package com.example.abschlussprojekt.ui
+
+import QuizViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
@@ -22,13 +27,20 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.totalQuestions.observe(viewLifecycleOwner) { totalQuestions ->
-            // Setze die Textfelder mit den Ergebnissen
+            // Textfelder mit den Ergebnissen
             binding.tvTotalQuestions.text = "Gesamtzahl der Fragen: $totalQuestions"
         }
 
         viewModel.correctAnswers.observe(viewLifecycleOwner) { correctAnswers ->
-            // Setze die Textfelder mit den Ergebnissen
+            // Textfelder mit den Ergebnissen
             binding.tvCorrectAnswers.text = "Richtige Antworten: $correctAnswers"
         }
+
+        // Button-Click-Listener für den Neustart des Spiels
+        binding.restartButton.setOnClickListener {
+            viewModel.resetQuiz()
+            findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+        }
     }
+
 }

@@ -15,24 +15,31 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     private val _answeredQuestions = MutableLiveData<MutableList<Question>>(mutableListOf())
     val answeredQuestions: LiveData<MutableList<Question>> = _answeredQuestions
 
+    private val usedPlants = mutableSetOf<QuizPlant>()
+
     fun generateQuestions(plantList: List<QuizPlant>): List<Question> {
         val questions = mutableListOf<Question>()
-        val usedPlants = mutableSetOf<QuizPlant>()
+        val usedPlants = mutableSetOf<String>() // Hier speichern wir die Namen der Pflanzen, die bereits verwendet wurden
 
         while (questions.size < 9) {
             val randomPlant = plantList.random()
-            if (randomPlant !in usedPlants) {
-                usedPlants.add(randomPlant)
+            if (randomPlant.name !in usedPlants) {
+                usedPlants.add(randomPlant.name)
+
                 val answerOptions = mutableListOf<String>()
-                val shuffledPlantList = plantList.shuffled()
-                repeat(4) {
-                    val randomAnswer = shuffledPlantList.random().name
-                    answerOptions.add(randomAnswer)
+                answerOptions.add(randomPlant.name) // Die richtige Antwort ist der Name der aktuellen Pflanze
+
+                // Zufällige Antwortmöglichkeiten auswählen, ohne Duplikate
+                while (answerOptions.size < 4) {
+                    val randomAnswer = plantList.random().name
+                    if (randomAnswer != randomPlant.name && randomAnswer !in answerOptions) {
+                        answerOptions.add(randomAnswer)
+                    }
                 }
-                val correctAnswer = randomPlant.name
-                answerOptions.add(correctAnswer)
+
                 answerOptions.shuffle()
-                val question = Question("Welche der Pflanzen ist es?", randomPlant.imageResource, answerOptions, correctAnswer)
+
+                val question = Question("Welche der Pflanzen ist es?", randomPlant.imageResource, answerOptions, randomPlant.name)
                 questions.add(question)
             }
         }
@@ -40,6 +47,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         _totalQuestions.value = questions.size
         return questions
     }
+
 
     fun checkAnswer(question: Question, selectedAnswer: String) {
         if (question.correctAnswer == selectedAnswer) {

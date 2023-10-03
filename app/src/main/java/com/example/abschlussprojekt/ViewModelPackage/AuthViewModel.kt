@@ -1,4 +1,4 @@
-package com.example.abschlussprojekt
+package com.example.abschlussprojekt.ViewModelPackage
 
 import android.util.Log
 import androidx.lifecycle.LiveData

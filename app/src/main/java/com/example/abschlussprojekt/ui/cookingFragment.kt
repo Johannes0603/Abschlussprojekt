@@ -15,7 +15,6 @@ import com.example.abschlussprojekt.adapter.cookingAdapter
 import com.example.abschlussprojekt.databinding.FragmentCookingBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abschlussprojekt.R
 
 

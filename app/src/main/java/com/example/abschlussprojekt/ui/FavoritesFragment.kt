@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.abschlussprojekt.AuthViewModel
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.databinding.FragmentFavoritesBinding
-import com.example.abschlussprojekt.databinding.FragmentHomeBinding
 
 
 class FavoritesFragment : Fragment() {

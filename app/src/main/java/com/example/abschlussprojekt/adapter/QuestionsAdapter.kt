@@ -29,15 +29,21 @@ class QuestionAdapter(
         fun bind(question: Question) {
             // Bind Frage-Informationen an die Ansichtselemente im Item
             binding.questionText.text = question.questionText
-            binding.option1.text = question.options[0] // Der Pflanzenname für Option 1
-            binding.option2.text = question.options[1] // Der Pflanzenname für Option 2
-            binding.option3.text = question.options[2] // Der Pflanzenname für Option 3
-            binding.option4.text = question.options[3] // Der Pflanzenname für Option 4
+
+            // Setze die Antwortmöglichkeiten für die RadioButtons
+            binding.option1.text = question.options[0]
+            binding.option2.text = question.options[1]
+            binding.option3.text = question.options[2]
+            binding.option4.text = question.options[3]
 
             // Setze das Bild der Pflanze
             binding.plantImage.setImageResource(question.plantImage)
 
-            // Weitere Bindungen oder Aktionen hier hinzufügen, falls erforderlich
+            // RadioButton-Click-Listener
+            binding.option1.setOnClickListener { viewModel.checkAnswer(question, binding.option1.text.toString()) }
+            binding.option2.setOnClickListener { viewModel.checkAnswer(question, binding.option2.text.toString()) }
+            binding.option3.setOnClickListener { viewModel.checkAnswer(question, binding.option3.text.toString()) }
+            binding.option4.setOnClickListener { viewModel.checkAnswer(question, binding.option4.text.toString()) }
         }
     }
 }
