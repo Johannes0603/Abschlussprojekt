@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.model.RecipeData
 import com.example.abschlussprojekt.databinding.ListItemBinding
 
 class cookingAdapter (

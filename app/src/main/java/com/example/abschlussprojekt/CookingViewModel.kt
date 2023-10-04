@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.model.RecipeData
 import com.example.abschlussprojekt.data.exampleData.CookData
 
 

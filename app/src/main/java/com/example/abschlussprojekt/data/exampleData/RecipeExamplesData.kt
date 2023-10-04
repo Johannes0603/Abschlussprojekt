@@ -1,7 +1,7 @@
 package com.example.abschlussprojekt.data.exampleData
 
 import com.example.abschlussprojekt.R
-import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.model.RecipeData
 
 object RecipeExamplesData {
 

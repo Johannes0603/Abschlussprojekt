@@ -43,7 +43,7 @@ class cookingDetailsFragment : Fragment() {
         }
 
         // Füge einen Klicklistener zum Speichern von Änderungen hinzu
-        binding.button2.setOnClickListener {
+        binding.SAVE.setOnClickListener {
             saveChangesToRecipe()
         }
     }
@@ -53,13 +53,15 @@ class cookingDetailsFragment : Fragment() {
         Log.d("EditMode", "isEditing = $isEditing")
         binding.tvRecipeName.isEnabled = isEditing
         binding.tvRecipe.isEnabled = isEditing
-        binding.button2.visibility = if (isEditing) View.VISIBLE else View.GONE
+        binding.SAVE.visibility = if (isEditing) View.VISIBLE else View.GONE
+        binding.upImg.visibility = if (isEditing) View.VISIBLE else View.GONE
     }
 
     private fun setViewInDisplayMode() {
         binding.tvRecipeName.isEnabled = false
         binding.tvRecipe.isEnabled = false
-        binding.button2.visibility = View.GONE
+        binding.SAVE.visibility = View.GONE
+        binding.upImg.visibility = View.GONE
     }
 
     private fun saveChangesToRecipe() {

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.model.RecipeData
 
 @Database(entities = [RecipeData::class], version = 1)
 abstract class RecipeDatabase : RoomDatabase() {

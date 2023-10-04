@@ -1,7 +1,7 @@
 package com.example.abschlussprojekt.data.db
 
 import android.content.Context
-import com.example.abschlussprojekt.data.dataclass.RecipeData
+import com.example.abschlussprojekt.data.model.RecipeData
 import com.example.abschlussprojekt.data.exampleData.RecipeExamplesData
 
 class RecipeRepository(private val database: RecipeDatabase) {
