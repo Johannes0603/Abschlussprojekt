@@ -55,7 +55,9 @@ class phytotherapieFragment : Fragment() {
         val recView = binding.rvPhyto
         recView.setHasFixedSize(true)
 
-
+        // Hier wird der Adapter initialisiert
+        adapter = PhytoAdapter(PHList, viewModel) // Stelle sicher, dass 'PHList' und 'viewModel' korrekt sind
+        recView.adapter = adapter
     }
     private fun EventChangeListener(){
         db = FirebaseFirestore.getInstance()
