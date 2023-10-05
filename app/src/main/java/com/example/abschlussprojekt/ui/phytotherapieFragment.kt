@@ -31,15 +31,16 @@ class phytotherapieFragment : Fragment() {
     private val viewModel: fbPhytoVM by activityViewModels()
     private lateinit var binding: FragmentPhytotherapieBinding
     private lateinit var adapter: PhytoAdapter
-    private lateinit var db : FirebaseFirestore
-    private var PHList : MutableList<PhytoRecipes> = mutableListOf()
+    private lateinit var db: FirebaseFirestore
+    private var PHList: MutableList<PhytoRecipes> = mutableListOf()
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,30 +61,36 @@ class phytotherapieFragment : Fragment() {
         recView.layoutManager = layoutManager
 
         // Hier wird der Adapter initialisiert
-        adapter = PhytoAdapter(PHList, viewModel) // Stelle sicher, dass 'PHList' und 'viewModel' korrekt sind
+        adapter = PhytoAdapter(
+            PHList,
+            viewModel
+        ) // Stelle sicher, dass 'PHList' und 'viewModel' korrekt sind
         recView.adapter = adapter
-    }
-    private fun EventChangeListener(){
-        db = FirebaseFirestore.getInstance()
-        db.collection("RezeptePhyt").orderBy("Name", Query.Direction.ASCENDING).
-                addSnapshotListener(object : EventListener<QuerySnapshot> {
-                    override fun onEvent(
-                        value: QuerySnapshot?,
-                        error: FirebaseFirestoreException?
-                    ){
-                        if(error != null){
-                            Log.e("FST Error",error.message.toString())
-                            return
-                        }
-                        for(dc : DocumentChange in value?.documentChanges!!){
-                            if(dc.type == DocumentChange.Type.ADDED){
-                                val phytoRecipe = dc.document.toObject(PhytoRecipes::class.java)
-                                PHList.add(phytoRecipe)
-                            }
-                        }
-                        adapter.notifyDataSetChanged()
-                    }
+        eventChangeListener()
 
-                })
+
+    }
+    private fun eventChangeListener() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("RezeptePhyt").orderBy("Name", Query.Direction.ASCENDING)
+            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+                override fun onEvent(
+                    value: QuerySnapshot?,
+                    error: FirebaseFirestoreException?
+                ) {
+                    if (error != null) {
+                        Log.e("FST Error", error.message.toString())
+                        return
+                    }
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            val phytoRecipe = dc.document.toObject(PhytoRecipes::class.java)
+                            PHList.add(phytoRecipe)
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+            })
     }
 }
