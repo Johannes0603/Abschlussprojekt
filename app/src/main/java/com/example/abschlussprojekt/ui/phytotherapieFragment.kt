@@ -71,7 +71,8 @@ class phytotherapieFragment : Fragment() {
                         }
                         for(dc : DocumentChange in value?.documentChanges!!){
                             if(dc.type == DocumentChange.Type.ADDED){
-                                PHList.add(dc.document.toObject(User::class.java))
+                                val phytoRecipe = dc.document.toObject(PhytoRecipes::class.java)
+                                PHList.add(phytoRecipe)
                             }
                         }
                         adapter.notifyDataSetChanged()
