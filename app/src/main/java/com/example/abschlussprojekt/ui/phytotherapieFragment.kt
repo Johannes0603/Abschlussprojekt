@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.example.abschlussprojekt.LexiconViewModel
@@ -54,6 +55,9 @@ class phytotherapieFragment : Fragment() {
         helper.attachToRecyclerView(binding.rvPhyto)
         val recView = binding.rvPhyto
         recView.setHasFixedSize(true)
+        // Hier wird der LinearLayoutManager hinzugefügt
+        val layoutManager = LinearLayoutManager(requireContext())
+        recView.layoutManager = layoutManager
 
         // Hier wird der Adapter initialisiert
         adapter = PhytoAdapter(PHList, viewModel) // Stelle sicher, dass 'PHList' und 'viewModel' korrekt sind
