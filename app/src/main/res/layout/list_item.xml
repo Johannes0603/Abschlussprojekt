@@ -11,15 +11,16 @@
         android:id="@+id/ivLexiconList"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/img_c"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+
         android:background="@drawable/rounded_plant_list_img"
+        android:src="@drawable/img_c"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="12dp"
-         />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvListItem"

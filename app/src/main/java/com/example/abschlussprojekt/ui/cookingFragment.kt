@@ -25,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
-
 class cookingFragment : Fragment() {
     private lateinit var binding: FragmentCookingBinding
     private lateinit var adapter: fbCookingAdapter
@@ -48,15 +47,17 @@ class cookingFragment : Fragment() {
         helper.attachToRecyclerView(binding.rvCooking)
         val recView = binding.rvCooking
         recView.setHasFixedSize(true)
-        viewModel.setupProfileRefForCurrentUser(currentUser.value?.uid)
+        viewModel.setupProfileRefForCurrentUser(viewModel.currentUser.value)
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())
         recView.layoutManager = layoutManager
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
+
             override fun afterTextChanged(s: Editable?) {
             }
         })
@@ -67,15 +68,13 @@ class cookingFragment : Fragment() {
         recView.adapter = adapter
         //addObserver()
         // Klick-Listener für den ImageButton hinzufügen
-        adapter.setOnItemClickListener {selectedRecipe ->
+        adapter.setOnItemClickListener { selectedRecipe ->
             viewModel.updateRecipeFire(selectedRecipe)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
         eventChangeListener()
-
-
-
     }
+
     private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("RezepteCook").orderBy("CookName", Query.Direction.ASCENDING)
@@ -91,19 +90,13 @@ class cookingFragment : Fragment() {
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
                             val cookRecipe = dc.document.toObject(cookRecipes::class.java)
-                            fbCookList.add(cookRecipe)
+                            if (!fbCookList.contains(cookRecipe))
+                                fbCookList.add(cookRecipe)
+
                         }
                     }
                     adapter.notifyDataSetChanged()
                 }
-
             })
     }
-    /*fun addObserver(){
-        viewModel.allRecipes.observe(viewLifecycleOwner,Observer{
-            binding.rvCooking.adapter = cookingAdapter(it,viewModel)
-        })
-    }*/
-
-
 }

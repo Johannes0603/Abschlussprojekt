@@ -8,6 +8,7 @@ import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -31,8 +32,12 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         val binding = holder.binding
         val imgUri = item.img.toUri()?.buildUpon()?.scheme("")?.build()
         binding.tvListItem.text = item.CookName
-        binding.ivLexiconList.load(item.img)
-        loadRoundImage(binding.ivLexiconList, imgUri)
+        binding.ivLexiconList.load(item.img){
+            //hier coil transform
+            transformations(CircleCropTransformation())
+        }
+        //loadRoundImage(binding.ivLexiconList, imgUri)
+
 
         // Hier setzen wir den Click-Listener auf das Element
         holder.itemView.setOnClickListener {
