@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_cookingFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_cookingFragment_to_cookingDetailsFragment"
+            app:destination="@id/cookingDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyHelpersFragment"
@@ -174,7 +177,11 @@
         android:id="@+id/cookingDetailsFragment"
         android:name="com.example.abschlussprojekt.ui.cookingDetailsFragment"
         android:label="fragment_cooking_details"
-        tools:layout="@layout/fragment_cooking_details" />
+        tools:layout="@layout/fragment_cooking_details" >
+        <action
+            android:id="@+id/action_cookingDetailsFragment_to_cookingFragment"
+            app:destination="@id/cookingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.abschlussprojekt.ui.FavoritesFragment"

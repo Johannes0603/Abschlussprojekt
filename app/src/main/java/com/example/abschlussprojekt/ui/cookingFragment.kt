@@ -11,15 +11,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
-import com.example.abschlussprojekt.adapter.cookingAdapter
 import com.example.abschlussprojekt.databinding.FragmentCookingBinding
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.adapter.fbCookingAdapter
-import com.example.abschlussprojekt.data.model.PhytoRecipes
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
@@ -51,6 +48,7 @@ class cookingFragment : Fragment() {
         helper.attachToRecyclerView(binding.rvCooking)
         val recView = binding.rvCooking
         recView.setHasFixedSize(true)
+        viewModel.setupProfileRefForCurrentUser(currentUser.value?.uid)
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())
         recView.layoutManager = layoutManager
@@ -69,9 +67,9 @@ class cookingFragment : Fragment() {
         recView.adapter = adapter
         //addObserver()
         // Klick-Listener für den ImageButton hinzufügen
-        binding.savedFavoritesCooking.setOnClickListener {
-            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
-            findNavController().navigate(R.id.action_cookingFragment_to_favoritesFragment)
+        adapter.setOnItemClickListener {selectedRecipe ->
+            viewModel.updateRecipeFire(selectedRecipe)
+            findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
         eventChangeListener()
 

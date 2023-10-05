@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.ListItemBinding
 
 class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val viewModel : firebaseCookVM):
     RecyclerView.Adapter<fbCookingAdapter.ItemViewHolder>() {
+    private var onItemClickListener: ((cookRecipes) -> Unit)? = null
 
     inner class ItemViewHolder(val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -30,9 +33,18 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         binding.tvListItem.text = item.CookName
         binding.ivLexiconList.load(item.img)
         loadRoundImage(binding.ivLexiconList, imgUri)
+
+        // Hier setzen wir den Click-Listener auf das Element
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.invoke(item)
+        }
+
     }
     override fun getItemCount(): Int {
         return dataSet.size
+    }
+    fun setOnItemClickListener(listener: (cookRecipes) -> Unit) {
+        onItemClickListener = listener
     }
     // Methode zum Laden des Bildes in das ImageView im runden Format
     private fun loadRoundImage(imageView: ImageView, imageUrl: Uri?) {

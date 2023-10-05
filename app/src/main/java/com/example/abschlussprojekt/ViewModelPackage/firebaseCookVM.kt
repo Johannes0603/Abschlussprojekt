@@ -7,13 +7,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.abschlussprojekt.data.model.RecipeData
+import com.example.abschlussprojekt.data.model.cookRecipes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
-class firebaseCookVM (application: Application) : AndroidViewModel(application){
+class firebaseCookVM (application: Application) : AndroidViewModel(application) {
 
     // Instanzen der verschiedenen Firebase Services
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -26,37 +27,49 @@ class firebaseCookVM (application: Application) : AndroidViewModel(application){
         get() = _currentUser
 
     // profileRef ist lateinit, da sie vom currentUser abhängt, wird in Funktion setupUserEnv() gesetzt sobald User eingeloggt wird
-    lateinit var profileRef: DocumentReference
+    private var profileRef: DocumentReference? = null
 
     // Referenz auf den Firebase Storage
     private val storageRef = firebaseStorage.reference
 
+    private val _selectedRecipe = MutableLiveData<cookRecipes>()
+    val selectedRecipe: LiveData<cookRecipes>
+        get() = _selectedRecipe
+
     // Updaten eines Profils im Firestore
-    fun updateRecipe(upRecipe: RecipeData) {
-        profileRef.set(upRecipe)
+    fun updateRecipeFire(updatedRecipe: cookRecipes) {
+        profileRef?.set(updatedRecipe)
+        _selectedRecipe.value = updatedRecipe
     }
 
-    // Funktion um Bild in den Firebase Storage hochzuladen
-    fun uploadImage(uri: Uri) {
-        // Erstellen einer Referenz und des Upload Tasks
-        val imageRef = storageRef.child("images/${currentUser.value?.uid}/profilePic")
-        val uploadTask = imageRef.putFile(uri)
+    // Funktion, um die Profilreferenz basierend auf dem aktuellen Benutzer festzulegen
+    fun setupProfileRefForCurrentUser(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
+            profileRef = firebaseStore.collection("users").document(currentUser.uid)
+        }
 
-        // Ausführen des UploadTasks
-        uploadTask.addOnCompleteListener {
-            imageRef.downloadUrl.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    // Wenn Upload erfolgreich, speichern der Bild-Url im User-Profil
-                    setImage(it.result)
+        // Funktion um Bild in den Firebase Storage hochzuladen
+        fun uploadImage(uri: Uri) {
+            // Erstellen einer Referenz und des Upload Tasks
+            val imageRef = storageRef.child("images/${currentUser.value?.uid}/profilePic")
+            val uploadTask = imageRef.putFile(uri)
+
+            // Ausführen des UploadTasks
+            uploadTask.addOnCompleteListener {
+                imageRef.downloadUrl.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        // Wenn Upload erfolgreich, speichern der Bild-Url im User-Profil
+                        setImage(it.result)
+                    }
                 }
             }
         }
-    }
 
-    // Funktion um Url zu neue hochgeladenem Bild im Firestore upzudaten
-    private fun setImage(uri: Uri) {
-        profileRef.update("profilePicture", uri.toString()).addOnFailureListener {
-            Log.w("ERROR", "Error writing document: $it")
+        // Funktion um Url zu neue hochgeladenem Bild im Firestore upzudaten
+        private fun setImage(uri: Uri) {
+            profileRef.update("profilePicture", uri.toString()).addOnFailureListener {
+                Log.w("ERROR", "Error writing document: $it")
+            }
         }
     }
 }
