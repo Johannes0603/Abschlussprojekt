@@ -1,5 +1,6 @@
 package com.example.abschlussprojekt.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.abschlussprojekt.CookingViewModel
@@ -16,6 +18,12 @@ class cookingDetailsFragment : Fragment() {
     private val viewModel: CookingViewModel by activityViewModels()
     private lateinit var binding: FragmentCookingDetailsBinding
     private var isEditing = false // Um den Bearbeitungsmodus zu verfolgen
+    // Erstellen der GetContent-Funktion, um Bilder vom Gerät auszuwählen und anschließend ans ViewModel weiterzugeben
+   /* private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            CookingViewModel.uploadImage(uri)
+        }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
