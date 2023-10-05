@@ -20,14 +20,14 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ApiService{
-    @GET("plants?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
+    @GET("plants?token=")
     suspend fun getPlants(
         @Query("page") page: Int,
         @Query("token") token: String,
         @Query("term") term: String
     ): PlantList
 
-    @GET("plants/search?token=QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI")
+    @GET("plants/search?token=")
     suspend fun getPlantsSearch(@Query("token") token: String,@Query("q") term: String) : PlantList
 }
 

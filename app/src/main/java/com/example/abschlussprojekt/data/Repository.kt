@@ -3,6 +3,7 @@ package com.example.abschlussprojekt.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.abschlussprojekt.BuildConfig
 import com.example.abschlussprojekt.data.dbPlants.PlantDataBase
 import com.example.abschlussprojekt.data.model.Plant
 import com.example.abschlussprojekt.remote.PlantApi
@@ -19,13 +20,13 @@ class Repository(private val api: PlantApi, private val dataBase: PlantDataBase)
         get() = _plantList
 
     suspend fun getPlants(term: String, page: Int) {
-        val results = api.retrofitService.getPlants(page,"QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI",term).data
+        val results = api.retrofitService.getPlants(page,BuildConfig.apiKey,term).data
         _plantList.value = results.sortedBy { it.commonName }
         Log.d("api fail","$results")
     }
     suspend fun getPlantsSearch(term: String) {
         try {
-            val results = api.retrofitService.getPlantsSearch("QQPtbDapaVxF_AD3qkee1xtRUVMNLNRCs2tGtR4x4YI",term).data
+            val results = api.retrofitService.getPlantsSearch(BuildConfig.apiKey,term).data
             _plantList.value = results
         } catch (e: Exception) {
             Log.e("APP", "ERROR,LOADING FAILED : $e")

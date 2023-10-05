@@ -18,6 +18,7 @@ dependencies{
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
 }
+val apiKey: String = com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir).getProperty("apiKey")
 
 android {
     namespace = "com.example.abschlussprojekt"
@@ -35,11 +36,16 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String", "apiKey", apiKey)
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            buildConfigField("String", "apiKey", apiKey)
         }
     }
     compileOptions {
@@ -52,6 +58,7 @@ android {
     buildFeatures{
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 }
 
