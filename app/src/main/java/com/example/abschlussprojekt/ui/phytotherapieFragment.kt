@@ -10,21 +10,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
-import com.example.abschlussprojekt.LexiconViewModel
-import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.fbPhytoVM
-import com.example.abschlussprojekt.adapter.LexiconAdapter
 import com.example.abschlussprojekt.adapter.PhytoAdapter
 import com.example.abschlussprojekt.data.model.PhytoRecipes
 import com.example.abschlussprojekt.databinding.FragmentPhytotherapieBinding
-import com.example.abschlussprojekt.databinding.FragmentPlantLexiconBinding
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.auth.User
+
 
 
 class phytotherapieFragment : Fragment() {

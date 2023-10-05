@@ -5,4 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 
 class fbPhytoVM (application: Application) :
     AndroidViewModel(application) {
+
+
 }
