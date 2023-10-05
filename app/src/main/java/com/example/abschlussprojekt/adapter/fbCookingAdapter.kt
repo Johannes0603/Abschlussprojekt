@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -27,6 +28,7 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         val binding = holder.binding
         val imgUri = item.img.toUri()?.buildUpon()?.scheme("")?.build()
         binding.tvListItem.text = item.CookName
+        binding.ivLexiconList.load(item.img)
         loadRoundImage(binding.ivLexiconList, imgUri)
     }
     override fun getItemCount(): Int {
