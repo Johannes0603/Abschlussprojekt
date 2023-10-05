@@ -20,7 +20,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCooking"
             android:layout_width="411dp"
-            android:layout_height="535dp"
+            android:layout_height="499dp"
             android:layout_marginTop="2dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
