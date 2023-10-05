@@ -21,6 +21,7 @@ class PhytoAdapter(
     override fun onBindViewHolder(holder: PhytoAdapter.ItemViewHolder, position: Int){
         val item = dataSet[position]
         val binding = holder.binding
+        binding.tvListItem.text = item.Name
     }
     override fun getItemCount(): Int {
         return dataSet.size

@@ -1,4 +1,8 @@
 package com.example.abschlussprojekt.ViewModelPackage
 
-class fbPhytoVM {
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+
+class fbPhytoVM (application: Application) :
+    AndroidViewModel(application) {
 }

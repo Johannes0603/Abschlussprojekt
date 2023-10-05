@@ -1,60 +1,82 @@
 package com.example.abschlussprojekt.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
+import com.example.abschlussprojekt.LexiconViewModel
 import com.example.abschlussprojekt.R
+import com.example.abschlussprojekt.ViewModelPackage.fbPhytoVM
+import com.example.abschlussprojekt.adapter.LexiconAdapter
+import com.example.abschlussprojekt.adapter.PhytoAdapter
+import com.example.abschlussprojekt.data.model.PhytoRecipes
+import com.example.abschlussprojekt.databinding.FragmentPhytotherapieBinding
+import com.example.abschlussprojekt.databinding.FragmentPlantLexiconBinding
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.auth.User
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [phytotherapieFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class phytotherapieFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val viewModel: fbPhytoVM by activityViewModels()
+    private lateinit var binding: FragmentPhytotherapieBinding
+    private lateinit var adapter: PhytoAdapter
+    private lateinit var db : FirebaseFirestore
+    private var PHList : MutableList<PhytoRecipes> = mutableListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_phytotherapie, container, false)
+        binding = FragmentPhytotherapieBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment phytotherapieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            phytotherapieFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Der SnapHelper sorgt dafür, dass die RecyclerView immer auf das aktuelle List Item springt
+        val helper: SnapHelper = PagerSnapHelper()
+        helper.attachToRecyclerView(binding.rvPhyto)
+        val recView = binding.rvPhyto
+        recView.setHasFixedSize(true)
+
+
+    }
+    private fun EventChangeListener(){
+        db = FirebaseFirestore.getInstance()
+        db.collection("RezeptePhyt").orderBy("Name", Query.Direction.ASCENDING).
+                addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ){
+                        if(error != null){
+                            Log.e("FST Error",error.message.toString())
+                            return
+                        }
+                        for(dc : DocumentChange in value?.documentChanges!!){
+                            if(dc.type == DocumentChange.Type.ADDED){
+                                PHList.add(dc.document.toObject(User::class.java))
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
+                    }
+
+                })
     }
 }

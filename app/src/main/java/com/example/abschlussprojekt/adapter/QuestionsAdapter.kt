@@ -30,7 +30,7 @@ class QuestionAdapter(
             // Bind Frage-Informationen an die Ansichtselemente im Item
             binding.questionText.text = question.questionText
 
-            // Setze die Antwortmöglichkeiten für die RadioButtons
+            // Setzt die Antwortmöglichkeiten für die RadioButtons
             binding.option1.text = question.options[0]
             binding.option2.text = question.options[1]
             binding.option3.text = question.options[2]
