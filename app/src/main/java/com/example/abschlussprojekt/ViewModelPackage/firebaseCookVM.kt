@@ -43,17 +43,11 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         _selectedRecipe.value = updatedRecipe
     }
 
-    // Funktion, um die Profilreferenz basierend auf dem aktuellen Benutzer festzulegen
-    fun setupProfileRefForCurrentUser(currentUser: FirebaseUser?) {
-        if (currentUser != null) {
-            recipeRef = firebaseStore.collection("users").document(currentUser.uid)
-        }
-    }
 
     // Funktion um Bild in den Firebase Storage hochzuladen
     fun uploadImage(uri: Uri) {
         // Erstellen einer Referenz und des Upload Tasks
-        val imageRef = storageRef.child("images/${currentUser.value?.uid}/profilePic")
+        val imageRef = storageRef.child("img/${currentUser.value?.uid}/profilePic")
         val uploadTask: UploadTask = imageRef.putFile(uri)
 
         // Ausführen des UploadTasks
@@ -77,7 +71,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
 
     // Funktion um Url zu neue hochgeladenem Bild im Firestore upzudaten
     private fun setImage(uri: Uri) {
-        recipeRef?.update("profilePicture", uri.toString())?.addOnFailureListener {
+        recipeRef?.update("img", uri.toString())?.addOnFailureListener {
             Log.w("ERROR", "Error writing document: $it")
         }
     }

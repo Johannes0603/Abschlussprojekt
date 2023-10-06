@@ -51,13 +51,14 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
     fun setOnItemClickListener(listener: (cookRecipes) -> Unit) {
         onItemClickListener = listener
     }
+    /*
     // Methode zum Laden des Bildes in das ImageView im runden Format
     private fun loadRoundImage(imageView: ImageView, imageUrl: Uri?) {
         Glide.with(imageView)
             .load(imageUrl)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .into(imageView)
-    }
+    }*/
 
 
 }

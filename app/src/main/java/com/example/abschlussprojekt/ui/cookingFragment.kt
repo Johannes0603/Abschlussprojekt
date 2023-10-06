@@ -47,7 +47,7 @@ class cookingFragment : Fragment() {
         helper.attachToRecyclerView(binding.rvCooking)
         val recView = binding.rvCooking
         recView.setHasFixedSize(true)
-        viewModel.setupProfileRefForCurrentUser(viewModel.currentUser.value)
+        //viewModel.setupProfileRefForCurrentUser(viewModel.currentUser.value)
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())
         recView.layoutManager = layoutManager

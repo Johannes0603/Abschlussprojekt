@@ -12,10 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.abschlussprojekt.CookingViewModel
+import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
+import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.FragmentCookingDetailsBinding
 
 class cookingDetailsFragment : Fragment() {
-    private val viewModel: CookingViewModel by activityViewModels()
+    private val viewModel: firebaseCookVM by activityViewModels()
     private lateinit var binding: FragmentCookingDetailsBinding
     private var isEditing = false // Um den Bearbeitungsmodus zu verfolgen
     // Erstellen der GetContent-Funktion, um Bilder vom Gerät auszuwählen und anschließend ans ViewModel weiterzugeben
@@ -35,11 +37,11 @@ class cookingDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.currentRecipe.observe(viewLifecycleOwner, { recipe ->
-            // Hier setzt du die Daten in die Ansichtselemente
-            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(recipe.title)
-            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(recipe.info)
-            binding.imgCoverDetail.load(recipe.image)
+        viewModel.selectedRecipe.observe(viewLifecycleOwner, {
+            // Hier setzen der Daten in die Ansichtselemente
+            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(it.CookName)
+            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.Zubereitung)
+            binding.imgCoverDetail.load(it.img)
         })
 
         // Initialisiere die Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
@@ -74,14 +76,14 @@ class cookingDetailsFragment : Fragment() {
 
     private fun saveChangesToRecipe() {
         // Hier das Rezept in der CookData-Klasse aktualisieren.
-        val updatedRecipe = viewModel.currentRecipe.value ?: return
+        val updatedRecipe = viewModel.selectedRecipe.value ?: return
 
         // Aktualisierung der Felder im aktualisierten Rezeptobjekt basierend auf den Benutzereingaben
-        updatedRecipe.title = binding.tvRecipeName.text.toString()
-        updatedRecipe.info = binding.tvRecipe.text.toString()
+        updatedRecipe.CookName = binding.tvRecipeName.text.toString()
+        updatedRecipe.Zubereitung = binding.tvRecipe.text.toString()
 
         // Speichern des aktualisierten Rezepts in der Datenbank
-        viewModel.updateRecipe(updatedRecipe)
+        viewModel.updateRecipeFire(updatedRecipe)
 
         // Nach dem Speichern kehre zurück zum Anzeigemodus
         toggleEditMode()

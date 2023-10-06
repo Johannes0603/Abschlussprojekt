@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -30,7 +31,8 @@ class cookingAdapter (
         val binding = holder.binding
         val imgUri = item.image
         binding.tvListItem.text = item.title
-        loadRoundImage(binding.ivLexiconList, imgUri)
+        //hier coil transform
+
         binding.btnListItem.setOnClickListener{
             viewModel.detailCurrentRecipe(item)
             val navController = holder.itemView.findNavController()
@@ -42,10 +44,5 @@ class cookingAdapter (
     override fun getItemCount(): Int {
         return dataSet.size
     }
-    private fun loadRoundImage(imageView: ImageView, imageUrl: Int) {
-        Glide.with(imageView)
-            .load(imageUrl)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
-            .into(imageView)
-    }
+
 }
