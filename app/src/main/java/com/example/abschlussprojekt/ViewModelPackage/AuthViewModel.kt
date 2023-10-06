@@ -1,6 +1,5 @@
 package com.example.abschlussprojekt.ViewModelPackage
 
-import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

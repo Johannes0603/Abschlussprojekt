@@ -6,7 +6,8 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.abschlussprojekt.CookingViewModel" />
+            type="com.example.abschlussprojekt.CookingViewModel"
+            />
 
     </data>
 
