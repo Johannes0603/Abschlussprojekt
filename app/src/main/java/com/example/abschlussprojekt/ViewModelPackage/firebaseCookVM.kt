@@ -37,6 +37,41 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     val selectedRecipe: LiveData<cookRecipes>
         get() = _selectedRecipe
 
+    private val _recipeList = MutableLiveData<MutableList<cookRecipes>>()
+    val recipeList: LiveData<MutableList<cookRecipes>>
+        get() = _recipeList
+
+    init {
+        // Hier die Initialisierung der recipeRef
+        val userId = _currentUser.value?.uid ?: ""
+        if (userId.isNotEmpty()) {
+            recipeRef = firebaseStore.collection("RezepteCook").document(userId)
+        }
+        // Hier die Initialisierung der Rezeptliste
+        loadRecipeList()
+    }
+
+    private fun loadRecipeList() {
+        // Lade die Rezepte aus Firebase und aktualisiere die _recipeList
+        val userId = _currentUser.value?.uid ?: ""
+        if (userId.isNotEmpty()) {
+            firebaseStore.collection("RezepteCook")
+                .whereEqualTo("userId", userId)
+                .get()
+                .addOnSuccessListener { result ->
+                    val recipes = mutableListOf<cookRecipes>()
+                    for (document in result) {
+                        val recipe = document.toObject(cookRecipes::class.java)
+                        recipes.add(recipe)
+                    }
+                    _recipeList.value = recipes
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("Firebase", "Error getting documents: ", exception)
+                }
+        }
+    }
+
     // Updaten eines Profils im Firestore
     // TODO: bedingung hinzufügen um neue items zu vermeiden 
     fun updateRecipeFire(updatedRecipe: cookRecipes) {
@@ -77,14 +112,34 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         }
     }
     // Hinzufügen eines neuen Rezepts zu Firebase
-    fun addNewRecipe(newRecipe: cookRecipes) {
-        firebaseStore.collection("RezepteCook")
-            .add(newRecipe)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Firebase", "Rezept wurde mit ID: ${documentReference.id} hinzugefügt")
+    fun addNewRecipeToFirebase(newRecipe: cookRecipes) {
+        val collectionRef = firebaseStore.collection("RezepteCook")
+        val newRecipeRef = collectionRef.document()
+        newRecipe.userId = newRecipeRef.id // Setzen der automatisch generierten ID
+        newRecipeRef.set(newRecipe)
+            .addOnSuccessListener {
+                Log.d("firebaseCookVM", "Neues Rezept wurde erfolgreich hinzugefügt")
             }
             .addOnFailureListener { e ->
-                Log.w("Firebase", "Fehler beim Hinzufügen des Rezepts", e)
+                Log.e("firebaseCookVM", "Fehler beim Hinzufügen des neuen Rezepts", e)
             }
     }
+    /*
+    // Hinzufügen eines neuen Rezepts zu Firebase
+    fun addNewRecipe(newRecipe: cookRecipes) {
+        //   Rezept zu Firebase hinzufügen
+        val userId = _currentUser.value?.uid ?: ""
+        if (userId.isNotEmpty()) {
+            firebaseStore.collection("RezepteCook")
+                .add(newRecipe.copy(userId = userId))
+                .addOnSuccessListener { documentReference ->
+                    Log.d("Firebase", "Rezept wurde mit ID: ${documentReference.id} hinzugefügt")
+                    //lokale Liste Aktualisieren
+                    loadRecipeList()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("Firebase", "Fehler beim Hinzufügen des Rezepts", e)
+                }
+        }
+    }*/
 }

@@ -39,8 +39,8 @@ class cookingDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.selectedRecipe.observe(viewLifecycleOwner, {
             // Hier setzen der Daten in die Ansichtselemente
-            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(it.CookName)
-            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.Zubereitung)
+            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(it.cookName)
+            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.zubereitung)
             binding.imgCoverDetail.load(it.img)
         })
 
@@ -60,6 +60,7 @@ class cookingDetailsFragment : Fragment() {
         binding.upImg.setOnClickListener {
             openImage()
         }
+
     }
 
     private fun toggleEditMode() {
@@ -84,7 +85,7 @@ class cookingDetailsFragment : Fragment() {
             }
         }
     private fun openImage() {
-        getContent.launch("image/*")
+        getContent.launch("img/*")
     }
 
     private fun saveChangesToRecipe() {
@@ -92,13 +93,19 @@ class cookingDetailsFragment : Fragment() {
         val updatedRecipe = viewModel.selectedRecipe.value ?: return
 
         // Aktualisierung der Felder im aktualisierten Rezeptobjekt basierend auf den Benutzereingaben
-        updatedRecipe.CookName = binding.tvRecipeName.text.toString()
-        updatedRecipe.Zubereitung = binding.tvRecipe.text.toString()
+        updatedRecipe.cookName = binding.tvRecipeName.text.toString()
+        updatedRecipe.zubereitung = binding.tvRecipe.text.toString()
 
-        // Speichern des aktualisierten Rezepte in der Datenbank
-        viewModel.updateRecipeFire(updatedRecipe)
+        // Speichern des aktualisierten Rezepts in der Datenbank (oder Hinzufügen eines neuen Rezepts)
+        if (updatedRecipe.userId.isEmpty()) {
+            // Hinzufügen eines neuen Rezepts
+            viewModel.addNewRecipeToFirebase(updatedRecipe)
+        } else {
+            // Aktualisieren eines vorhandenen Rezepts
+            viewModel.updateRecipeFire(updatedRecipe)
+        }
 
-        // Nach dem Speichern kehre zurück zum Anzeigemodus
+        // Nach dem Speichern  zurück zum Anzeigemodus
         toggleEditMode()
     }
 }

@@ -73,20 +73,21 @@ class cookingFragment : Fragment() {
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
         binding.btnAddCook.setOnClickListener {
-            // Hier ein neues Rezept erstellen und zu Firebase hinzufügen
-            val newRecipe = cookRecipes(
-                CookName = "",
-                Zubereitung = "",
-                img = ""
-            )
-            viewModel.addNewRecipe(newRecipe)
+            // Erstellen eines neuen leeren Rezeptobjekts
+            val newRecipe = cookRecipes()
+
+            // Setzen des ausgewählten Rezepts im ViewModel auf das neue Rezept
+            viewModel.updateRecipeFire(newRecipe)
+
+            // Navigieren zum Details-Fragment (Bearbeitungsmodus)
+            findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
         eventChangeListener()
     }
 
     private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
-        db.collection("RezepteCook").orderBy("CookName", Query.Direction.ASCENDING)
+        db.collection("RezepteCook").orderBy("cookName", Query.Direction.ASCENDING)
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(
                     value: QuerySnapshot?,

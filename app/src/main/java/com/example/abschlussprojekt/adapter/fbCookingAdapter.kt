@@ -31,7 +31,7 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         val item = dataSet[position]
         val binding = holder.binding
         val imgUri = item.img.toUri()?.buildUpon()?.scheme("")?.build()
-        binding.tvListItem.text = item.CookName
+        binding.tvListItem.text = item.cookName
         binding.ivLexiconList.load(item.img){
             //hier coil transform
             transformations(CircleCropTransformation())
