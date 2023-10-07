@@ -27,7 +27,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    // profileRef ist lateinit, da sie vom currentUser abhängt, wird in Funktion setupProfileRefForCurrentUser() gesetzt sobald User eingeloggt wird
+    // recipeRef ist lateinit, da sie vom currentUser abhängt
     private var recipeRef: DocumentReference? = null
 
     // Referenz auf den Firebase Storage

@@ -82,7 +82,7 @@ class cookingDetailsFragment : Fragment() {
         updatedRecipe.CookName = binding.tvRecipeName.text.toString()
         updatedRecipe.Zubereitung = binding.tvRecipe.text.toString()
 
-        // Speichern des aktualisierten Rezepts in der Datenbank
+        // Speichern des aktualisierten Rezepte in der Datenbank
         viewModel.updateRecipeFire(updatedRecipe)
 
         // Nach dem Speichern kehre zurück zum Anzeigemodus
