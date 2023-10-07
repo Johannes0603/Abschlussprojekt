@@ -44,17 +44,21 @@ class cookingDetailsFragment : Fragment() {
             binding.imgCoverDetail.load(it.img)
         })
 
-        // Initialisiere die Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
+        // Initialisieren der Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
         setViewInDisplayMode()
 
-        // Füge einen Klicklistener zum Umschalten zwischen Bearbeitungs- und Anzeigemodus hinzu
+        // Klicklistener zum Umschalten zwischen Bearbeitungs- und Anzeigemodus
         binding.buttonEdit.setOnClickListener {
             toggleEditMode()
         }
 
-        // Füge einen Klicklistener zum Speichern von Änderungen hinzu
+        //Klicklistener zum Speichern von Änderungen
         binding.SAVE.setOnClickListener {
             saveChangesToRecipe()
+        }
+
+        binding.upImg.setOnClickListener {
+            openImage()
         }
     }
 
@@ -72,6 +76,15 @@ class cookingDetailsFragment : Fragment() {
         binding.tvRecipe.isEnabled = false
         binding.SAVE.visibility = View.GONE
         binding.upImg.visibility = View.GONE
+    }
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                viewModel.uploadImage(it)
+            }
+        }
+    private fun openImage() {
+        getContent.launch("image/*")
     }
 
     private fun saveChangesToRecipe() {

@@ -38,6 +38,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         get() = _selectedRecipe
 
     // Updaten eines Profils im Firestore
+    // TODO: bedingung hinzufügen um neue items zu vermeiden 
     fun updateRecipeFire(updatedRecipe: cookRecipes) {
         recipeRef?.set(updatedRecipe)
         _selectedRecipe.value = updatedRecipe
@@ -61,7 +62,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
-                // Wenn Upload erfolgreich, speichern der Bild-Url im User-Profil
+                // Wenn Upload erfolgreich, speichern der Bild-Url
                 setImage(downloadUri)
             } else {
                 Log.e("UploadImage", "Failed to upload image: ${task.exception}")
@@ -74,5 +75,16 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         recipeRef?.update("img", uri.toString())?.addOnFailureListener {
             Log.w("ERROR", "Error writing document: $it")
         }
+    }
+    // Hinzufügen eines neuen Rezepts zu Firebase
+    fun addNewRecipe(newRecipe: cookRecipes) {
+        firebaseStore.collection("RezepteCook")
+            .add(newRecipe)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Firebase", "Rezept wurde mit ID: ${documentReference.id} hinzugefügt")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firebase", "Fehler beim Hinzufügen des Rezepts", e)
+            }
     }
 }

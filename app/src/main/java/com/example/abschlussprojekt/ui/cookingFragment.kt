@@ -72,6 +72,15 @@ class cookingFragment : Fragment() {
             viewModel.updateRecipeFire(selectedRecipe)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
+        binding.btnAddCook.setOnClickListener {
+            // Hier ein neues Rezept erstellen und zu Firebase hinzufügen
+            val newRecipe = cookRecipes(
+                CookName = "",
+                Zubereitung = "",
+                img = ""
+            )
+            viewModel.addNewRecipe(newRecipe)
+        }
         eventChangeListener()
     }
 
