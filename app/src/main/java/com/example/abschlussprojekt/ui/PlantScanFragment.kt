@@ -44,9 +44,9 @@ class PlantScanFragment : Fragment() {
         // Behandlung des Scan-Buttons
         binding.buttonTestScan.setOnClickListener {
             if (hasCameraPermission()) {
-                // Starte die Kamera-Aktivität oder Kamera-Fragment hier
-                // Erfasse ein Bild und führe die Bilderkennung aus
-                // Aktualisiere die UI mit den erkannten Pflanzen
+                // Kamera-Aktivität oder Kamera-Fragment hier
+                // Erfasse ein Bild und führe Bilderkennung aus
+                // Aktualisierte UI mit den erkannten Pflanzen
             } else {
                 requestCameraPermission()
             }

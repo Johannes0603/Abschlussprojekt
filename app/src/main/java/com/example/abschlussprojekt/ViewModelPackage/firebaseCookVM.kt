@@ -27,7 +27,6 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    // recipeRef ist lateinit, da sie vom currentUser abhängt
     private var recipeRef: DocumentReference? = null
 
     // Referenz auf den Firebase Storage
@@ -105,7 +104,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // Funktion um Url zu neue hochgeladenem Bild im Firestore upzudaten
+    // Funktion um Url zu neu hochgeladenem Bild im Firestore upzudaten
     private fun setImage(uri: Uri) {
         recipeRef?.update("img", uri.toString())?.addOnFailureListener {
             Log.w("ERROR", "Error writing document: $it")

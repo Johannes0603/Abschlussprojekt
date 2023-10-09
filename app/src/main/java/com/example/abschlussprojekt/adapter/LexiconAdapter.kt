@@ -46,11 +46,11 @@ class LexiconAdapter(
     override fun getItemCount(): Int {
         return dataSet.size
     }
-
+/*
     fun updateData(newData: List<Plant>) {
         dataSet = newData
         notifyDataSetChanged()
-    }
+    }*/
 
     // Methode zum Laden des Bildes in das ImageView im runden Format
     private fun loadRoundImage(imageView: ImageView, imageUrl: Uri?) {

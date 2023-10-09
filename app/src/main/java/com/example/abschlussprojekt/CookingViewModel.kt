@@ -52,8 +52,4 @@ class CookingViewModel(application: Application) : AndroidViewModel(application)
     }
 
 
-
-    //--------------------------FIREBASE----------------------------------
-
-
 }

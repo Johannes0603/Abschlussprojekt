@@ -7,25 +7,25 @@ import com.example.abschlussprojekt.data.model.Question
 import com.example.abschlussprojekt.databinding.ItemQuestionBinding
 
 class QuestionAdapter(
-    private val questions: List<Question>,
+    private val dataSet: List<Question>,
     private val viewModel: QuizViewModel
-) : RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<QuestionAdapter.ItemViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = ItemQuestionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val question = questions[position]
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val question = dataSet[position]
         holder.bind(question)
     }
 
     override fun getItemCount(): Int {
-        return questions.size
+        return dataSet.size
     }
 
-    inner class ViewHolder(private val binding: ItemQuestionBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ItemViewHolder(private val binding: ItemQuestionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(question: Question) {
             // Bind Frage-Informationen an die Ansichtselemente im Item
             binding.questionText.text = question.questionText
