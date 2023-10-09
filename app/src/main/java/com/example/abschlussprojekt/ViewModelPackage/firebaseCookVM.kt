@@ -73,7 +73,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     }
 
     // Updaten eines Profils im Firestore
-    // TODO: bedingung hinzufügen um neue items zu vermeiden 
+
     fun updateRecipeFire(updatedRecipe: cookRecipes) {
         recipeRef?.set(updatedRecipe)
         _selectedRecipe.value = updatedRecipe

@@ -1,18 +1,11 @@
 package com.example.abschlussprojekt.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.net.toUri
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
-import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.ListItemBinding
@@ -35,6 +28,7 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         binding.ivLexiconList.load(item.img){
             //hier coil transform
             transformations(CircleCropTransformation())
+
         }
         //loadRoundImage(binding.ivLexiconList, imgUri)
 
