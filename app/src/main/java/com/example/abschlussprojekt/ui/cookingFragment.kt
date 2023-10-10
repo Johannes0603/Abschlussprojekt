@@ -11,13 +11,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
-import com.example.abschlussprojekt.databinding.FragmentCookingBinding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.adapter.fbCookingAdapter
 import com.example.abschlussprojekt.data.model.cookRecipes
+import com.example.abschlussprojekt.databinding.FragmentCookingBinding
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -82,7 +82,12 @@ class cookingFragment : Fragment() {
             // Navigieren zum Details-Fragment (Bearbeitungsmodus)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
+        viewModel.inputText.observe(viewLifecycleOwner){
+            viewModel.getResultSearch(it)
+        }
+
         eventChangeListener()
+
     }
 
     private fun eventChangeListener() {

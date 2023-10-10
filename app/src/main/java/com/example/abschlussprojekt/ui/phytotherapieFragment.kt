@@ -43,8 +43,9 @@ class phytotherapieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Der SnapHelper sorgt dafür, dass die RecyclerView immer auf das aktuelle List Item springt
         val helper: SnapHelper = PagerSnapHelper()
-        helper.attachToRecyclerView(binding.rvPhyto)
         val recView = binding.rvPhyto
+        helper.attachToRecyclerView(recView)
+
         recView.setHasFixedSize(true)
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())

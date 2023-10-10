@@ -13,7 +13,6 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
 
 class firebaseCookVM(application: Application) : AndroidViewModel(application) {
 
@@ -21,6 +20,8 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseStore = FirebaseFirestore.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance()
+
+    lateinit var cookRef: DocumentReference
 
     // Current-User Live-Data
     private var _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
@@ -39,6 +40,10 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     private val _recipeList = MutableLiveData<MutableList<cookRecipes>>()
     val recipeList: LiveData<MutableList<cookRecipes>>
         get() = _recipeList
+
+    fun updateRecipe(recipe: cookRecipes) {
+        cookRef.set(recipe)
+    }
 
     init {
         // Hier die Initialisierung der recipeRef
@@ -82,24 +87,17 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     // Funktion um Bild in den Firebase Storage hochzuladen
     fun uploadImage(uri: Uri) {
         // Erstellen einer Referenz und des Upload Tasks
-        val imageRef = storageRef.child("img/${currentUser.value?.uid}/profilePic")
-        val uploadTask: UploadTask = imageRef.putFile(uri)
+        val imageRef = storageRef.child("RezepteCook/5gPs86f5sfMsN69FGYL6/img")
+        val uploadTask = imageRef.putFile(uri)
 
         // Ausführen des UploadTasks
-        uploadTask.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
+        // Ausführen des UploadTasks
+        uploadTask.addOnCompleteListener {
+            imageRef.downloadUrl.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    // Wenn Upload erfolgreich, speichern der Bild-Url im User-Profil
+                    setImage(it.result)
                 }
-            }
-            imageRef.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val downloadUri = task.result
-                // Wenn Upload erfolgreich, speichern der Bild-Url
-                setImage(downloadUri)
-            } else {
-                Log.e("UploadImage", "Failed to upload image: ${task.exception}")
             }
         }
     }
@@ -110,6 +108,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
             Log.w("ERROR", "Error writing document: $it")
         }
     }
+
     // Hinzufügen eines neuen Rezepts zu Firebase
     fun addNewRecipeToFirebase(newRecipe: cookRecipes) {
         val collectionRef = firebaseStore.collection("RezepteCook")
@@ -123,6 +122,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
                 Log.e("firebaseCookVM", "Fehler beim Hinzufügen des neuen Rezepts", e)
             }
     }
+
     /*
     // Hinzufügen eines neuen Rezepts zu Firebase
     fun addNewRecipe(newRecipe: cookRecipes) {
@@ -141,4 +141,23 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
                 }
         }
     }*/
+    //-------------------------------------suche---------------------------------------
+    private val _cookList = MutableLiveData<List<cookRecipes>>()
+    val inputText = MutableLiveData<String>()
+    fun getResultSearch(term: String) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("RezepteCook")
+            .whereEqualTo("cookName", inputText).get().addOnSuccessListener {
+                val dataList = mutableListOf<cookRecipes>()
+                for (it in it) {
+                    val cookRecipe = it.toObject(cookRecipes::class.java)
+                    dataList.add(cookRecipe)
+                }
+                _cookList.value = dataList
+            }
+            .addOnFailureListener {
+                Log.d("UIUIUIUI","hier könnte Ihr Fehler stehen")
+            }
+    }
 }
+

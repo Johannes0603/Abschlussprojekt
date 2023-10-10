@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import coil.load
-import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.FragmentCookingDetailsBinding
@@ -26,6 +25,13 @@ class cookingDetailsFragment : Fragment() {
             CookingViewModel.uploadImage(uri)
         }
     }*/
+    // Erstellen der GetContent-Funktion, um Bilder vom Gerät auszuwählen und anschließend ans ViewModel weiterzugeben
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            viewModel.uploadImage(uri)
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +49,13 @@ class cookingDetailsFragment : Fragment() {
             binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.zubereitung)
             binding.imgCoverDetail.load(it.img)
         })
-        val selectImageIntent = registerForActivityResult(ActivityResultContracts.GetContent())
-        { uri ->
-            binding.imgCoverDetail.setImageURI(uri)
+
+// Funktion um Bild vom Gerät auszuwählen
+        binding.upImg.setOnClickListener {
+            getContent.launch("image/*")
+            //openImage()
+
         }
-
-
 
         // Initialisieren der Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
         setViewInDisplayMode()
@@ -57,18 +64,27 @@ class cookingDetailsFragment : Fragment() {
         binding.buttonEdit.setOnClickListener {
             toggleEditMode()
         }
-
         //Klicklistener zum Speichern von Änderungen
         binding.SAVE.setOnClickListener {
-            saveChangesToRecipe()
+            val name = binding.tvRecipeName.text.toString()
+            val info = binding.tvRecipe.text.toString()
+            viewModel.updateRecipe(cookRecipes(name, info))
         }
-
-        binding.upImg.setOnClickListener {
-            selectImageIntent.launch("image/*")
-            //openImage()
-
+// Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
+        // Hier: Referenz auf Profil wird beobachtet
+        viewModel.cookRef.addSnapshotListener { snapshot, error ->
+            if (error == null && snapshot != null){
+                // Umwandeln des Snapshots in eine Klassen-Instanz und setzen der Felder
+                val updatedRecipe = snapshot.toObject(cookRecipes::class.java)
+                binding.tvRecipeName.setText(updatedRecipe?.cookName)
+                binding.tvRecipe.setText(updatedRecipe?.zubereitung)
+                if (updatedRecipe?.img != ""){
+                    binding.imgCoverDetail.load(updatedRecipe?.img)
+                }
+            }else {
+                Log.e("snapshot FEHLER", "hier könnte Ihr fehler stehen")
+            }
         }
-
     }
 
     private fun toggleEditMode() {
@@ -86,17 +102,10 @@ class cookingDetailsFragment : Fragment() {
         binding.SAVE.visibility = View.GONE
         binding.upImg.visibility = View.GONE
     }
-    private val getContent =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                viewModel.uploadImage(it)
-            }
-        }
-    private fun openImage() {
-        getContent.launch("img/*")
+
 
     }
-
+/*
     private fun saveChangesToRecipe() {
         // Hier das Rezept in der CookData-Klasse aktualisieren.
         val updatedRecipe = viewModel.selectedRecipe.value ?: return
@@ -105,8 +114,6 @@ class cookingDetailsFragment : Fragment() {
         updatedRecipe.cookName = binding.tvRecipeName.text.toString()
         updatedRecipe.zubereitung = binding.tvRecipe.text.toString()
 
-
-
         //
 
         updatedRecipe.img = binding.imgCoverDetail.load("").toString()
@@ -114,9 +121,6 @@ class cookingDetailsFragment : Fragment() {
         val imageResourceId = resources.getIdentifier(updatedRecipe.img, "drawable", "")
         binding.imgCoverDetail.setImageResource(imageResourceId)*/
         //
-
-
-
 
         // Speichern des aktualisierten Rezepts in der Datenbank (oder Hinzufügen eines neuen Rezepts)
         if (updatedRecipe.userId.isEmpty()) {
@@ -129,5 +133,4 @@ class cookingDetailsFragment : Fragment() {
 
         // Nach dem Speichern  zurück zum Anzeigemodus
         toggleEditMode()
-    }
-}
+    }*/
