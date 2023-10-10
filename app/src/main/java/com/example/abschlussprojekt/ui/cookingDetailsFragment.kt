@@ -43,6 +43,12 @@ class cookingDetailsFragment : Fragment() {
             binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.zubereitung)
             binding.imgCoverDetail.load(it.img)
         })
+        val selectImageIntent = registerForActivityResult(ActivityResultContracts.GetContent())
+        { uri ->
+            binding.imgCoverDetail.setImageURI(uri)
+        }
+
+
 
         // Initialisieren der Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
         setViewInDisplayMode()
@@ -58,7 +64,9 @@ class cookingDetailsFragment : Fragment() {
         }
 
         binding.upImg.setOnClickListener {
-            openImage()
+            selectImageIntent.launch("image/*")
+            //openImage()
+
         }
 
     }
@@ -86,6 +94,7 @@ class cookingDetailsFragment : Fragment() {
         }
     private fun openImage() {
         getContent.launch("img/*")
+
     }
 
     private fun saveChangesToRecipe() {
@@ -95,6 +104,19 @@ class cookingDetailsFragment : Fragment() {
         // Aktualisierung der Felder im aktualisierten Rezeptobjekt basierend auf den Benutzereingaben
         updatedRecipe.cookName = binding.tvRecipeName.text.toString()
         updatedRecipe.zubereitung = binding.tvRecipe.text.toString()
+
+
+
+        //
+
+        updatedRecipe.img = binding.imgCoverDetail.load("").toString()
+        /*
+        val imageResourceId = resources.getIdentifier(updatedRecipe.img, "drawable", "")
+        binding.imgCoverDetail.setImageResource(imageResourceId)*/
+        //
+
+
+
 
         // Speichern des aktualisierten Rezepts in der Datenbank (oder Hinzufügen eines neuen Rezepts)
         if (updatedRecipe.userId.isEmpty()) {

@@ -1,11 +1,52 @@
 package com.example.abschlussprojekt.data.model
 
 import com.squareup.moshi.Json
+
 data class PlantIdentificationResult(
     val results: List<PlantIdentificationResultItem>,
     val remainingIdentificationRequests: Int,
-    val version: String
-)
+    val version: String, override val size: Int
+) : List<PlantIdentificationResultItem> {
+    override fun contains(element: PlantIdentificationResultItem): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun containsAll(elements: Collection<PlantIdentificationResultItem>): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun get(index: Int): PlantIdentificationResultItem {
+        TODO("Not yet implemented")
+    }
+
+    override fun indexOf(element: PlantIdentificationResultItem): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun isEmpty(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun iterator(): Iterator<PlantIdentificationResultItem> {
+        TODO("Not yet implemented")
+    }
+
+    override fun lastIndexOf(element: PlantIdentificationResultItem): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun listIterator(): ListIterator<PlantIdentificationResultItem> {
+        TODO("Not yet implemented")
+    }
+
+    override fun listIterator(index: Int): ListIterator<PlantIdentificationResultItem> {
+        TODO("Not yet implemented")
+    }
+
+    override fun subList(fromIndex: Int, toIndex: Int): List<PlantIdentificationResultItem> {
+        TODO("Not yet implemented")
+    }
+}
 
 data class PlantIdentificationResultItem(
     val score: Int,

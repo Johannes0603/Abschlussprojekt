@@ -37,7 +37,7 @@ class PlantLexiconDetailFragment : Fragment() {
             binding.tv1LexiconDetail.text = it.commonName
             binding.tv2LexiconDetail.text = it.scientificName
         }
-        val toggleButton = binding.toggleButton
+        val toggleButton = binding.btnFavLex
         toggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 // Wenn der ToggleButton ausgewählt ist (ausgefüllter Stern), ändere das Hintergrundbild

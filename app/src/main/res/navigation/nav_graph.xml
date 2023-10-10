@@ -104,6 +104,9 @@
         <action
             android:id="@+id/action_phytotherapieFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_phytotherapieFragment_to_phytoDetailsFragment"
+            app:destination="@id/phytoDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopFragment"
@@ -256,5 +259,14 @@
         <action
             android:id="@+id/action_resultFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phytoDetailsFragment"
+        android:name="com.example.abschlussprojekt.ui.phytoDetailsFragment"
+        android:label="fragment_phyto_details"
+        tools:layout="@layout/fragment_phyto_details" >
+        <action
+            android:id="@+id/action_phytoDetailsFragment_to_phytotherapieFragment"
+            app:destination="@id/phytotherapieFragment" />
     </fragment>
 </navigation>

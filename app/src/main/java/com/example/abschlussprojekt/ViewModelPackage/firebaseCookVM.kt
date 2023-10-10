@@ -71,7 +71,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // Updaten eines Profils im Firestore
+    // Updaten eines Rezepts im Firestore
 
     fun updateRecipeFire(updatedRecipe: cookRecipes) {
         recipeRef?.set(updatedRecipe)
