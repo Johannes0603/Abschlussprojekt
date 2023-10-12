@@ -21,7 +21,7 @@ fun getDataBase(context: Context): PlantDataBase{
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 PlantDataBase::class.java,
-                "song_database"
+                "plant_database"
             )
                 .build()
         }

@@ -13,11 +13,26 @@ const val TAG = "AppRepositoryTAG"
 class Repository(private val api: PlantApi, private val dataBase: PlantDataBase) {
     private val _plantList = MutableLiveData<List<Plant>>()
 
+    val favPlants : LiveData<List<Plant>> = dataBase.PlantDataBaseDao.getAllPlants()
     val allPlants: LiveData<List<Plant>>
         get() = _plantList
 
     val getPlantList: LiveData<List<Plant>>
         get() = _plantList
+    suspend fun plantToFav(plant: Plant){
+        try {
+            dataBase.PlantDataBaseDao.insert(plant)
+        }catch (e:Exception){
+            Log.d(TAG, " Error $e")
+        }
+    }
+    suspend fun removePlantFav(key: Long){
+        try{
+            dataBase.PlantDataBaseDao.deleteByID(key)
+        }catch (e:Exception){
+            Log.d(TAG,"Meldung hier $e")
+        }
+    }
 
     suspend fun getPlants(term: String, page: Int) {
         val results = api.retrofitService.getPlants(page,BuildConfig.apiKey,term).data
