@@ -31,7 +31,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     private var recipeRef: DocumentReference? = null
 
     // Referenz auf den Firebase Storage
-    private val storageRef: StorageReference = firebaseStorage.reference
+    private val storageRef = firebaseStorage.reference
 
     private val _selectedRecipe = MutableLiveData<cookRecipes>()
     val selectedRecipe: LiveData<cookRecipes>
@@ -50,6 +50,8 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
         val userId = _currentUser.value?.uid ?: ""
         if (userId.isNotEmpty()) {
             recipeRef = firebaseStore.collection("RezepteCook").document(userId)
+            // Initialisiere cookRef mit einer sicheren Überprüfung
+            cookRef = recipeRef ?: throw IllegalStateException("cookRef could not be initialized")
         }
         // Hier die Initialisierung der Rezeptliste
         loadRecipeList()
@@ -87,7 +89,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     // Funktion um Bild in den Firebase Storage hochzuladen
     fun uploadImage(uri: Uri) {
         // Erstellen einer Referenz und des Upload Tasks
-        val imageRef = storageRef.child("RezepteCook/5gPs86f5sfMsN69FGYL6/img")
+        val imageRef = storageRef.child("RezepteCook/${selectedRecipe.value}/img")
         val uploadTask = imageRef.putFile(uri)
 
         // Ausführen des UploadTasks

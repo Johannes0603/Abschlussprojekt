@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.abschlussprojekt.data.Repository
-import com.example.abschlussprojekt.data.dbPlants.PlantDataBase.Companion.getDataBase
+import com.example.abschlussprojekt.data.dbPlants.getDataBase
 import com.example.abschlussprojekt.remote.PlantApi
 import kotlinx.coroutines.launch
 

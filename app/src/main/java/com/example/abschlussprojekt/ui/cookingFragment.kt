@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.firebaseCookVM
 import com.example.abschlussprojekt.adapter.fbCookingAdapter
@@ -29,6 +30,7 @@ class cookingFragment : Fragment() {
     private lateinit var binding: FragmentCookingBinding
     private lateinit var adapter: fbCookingAdapter
     private val viewModel: firebaseCookVM by activityViewModels()
+    private val viewModel2: CookingViewModel by activityViewModels()
     private lateinit var db: FirebaseFirestore
     private var fbCookList: MutableList<cookRecipes> = mutableListOf()
 
@@ -82,10 +84,17 @@ class cookingFragment : Fragment() {
             // Navigieren zum Details-Fragment (Bearbeitungsmodus)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
-        viewModel.inputText.observe(viewLifecycleOwner){
+
+        //für fbSuche
+        viewModel2.inputText.observe(viewLifecycleOwner){
             viewModel.getResultSearch(it)
         }
-
+        /*
+        viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+            // Aktualisieren Sie Ihre RecyclerView-Adapter-Daten mit den Suchergebnissen
+            adapter.updateData(recipes)
+        }
+        */
         eventChangeListener()
 
     }
