@@ -26,6 +26,7 @@ class LexiconViewModel(application: Application) :
 
     val favPlants = repository.favPlants
 
+
     private var currentPage = 1 // Startseite
 
     val currentPlant: LiveData<Plant>
