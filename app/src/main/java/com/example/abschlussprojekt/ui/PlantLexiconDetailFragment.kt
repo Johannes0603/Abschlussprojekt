@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import coil.load
 import com.example.abschlussprojekt.LexiconViewModel
 import com.example.abschlussprojekt.R
@@ -38,18 +39,25 @@ class PlantLexiconDetailFragment : Fragment() {
             binding.tv2LexiconDetail.text = it.scientificName
         }
         val toggleButton = binding.btnFavLex
+        toggleButton.isChecked = viewModel.currentPlantFavorited.value ?: false
         toggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.toggleFavorite()
             if (isChecked) {
-                // Wenn der ToggleButton ausgewählt ist (ausgefüllter Stern), ändere das Hintergrundbild
+                // Wenn der ToggleButton ausgewählt ist (ausgefüllter Stern)
                 buttonView.setBackgroundResource(R.drawable.btn_fav_on)
                 viewModel.safePlantFav()
                 viewModel.likePlant()
             } else {
-                // Wenn der ToggleButton nicht ausgewählt ist (leerer Stern), ändere das Hintergrundbild
+                // Wenn der ToggleButton nicht ausgewählt ist (leerer Stern)
                 buttonView.setBackgroundResource(R.drawable.btn_fav_off)
                 viewModel.dislikePlant()
                 viewModel.removePlantFav()
             }
         }
+        viewModel.isLiked.observe(viewLifecycleOwner, Observer{
+            if (viewModel.currentPlant.value?.liked == true){
+                binding.btnFavLex.setBackgroundResource(R.drawable.btn_fav_on)
+            }
+        })
     }
 }

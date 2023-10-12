@@ -37,9 +37,6 @@ class LexiconViewModel(application: Application) :
             repository.getPlants(term, currentPage)
         }
     }
-    fun detailCurrentPlant(plant: Plant){
-        _currentPlant.value = plant
-    }
 
     // Methode zum Laden der nächsten Seite
     fun loadNextPage(term: String) {
@@ -86,5 +83,18 @@ class LexiconViewModel(application: Application) :
                 _currentPlant.value?.let { repository.removePlantFav(it.id) }
             }
         }
+    }
+    private val _currentPlantFavorited = MutableLiveData<Boolean>()
+    val currentPlantFavorited: LiveData<Boolean> get() = _currentPlantFavorited
+
+    fun detailCurrentPlant(plant: Plant) {
+        _currentPlant.value = plant
+        _currentPlantFavorited.value = plant.liked // Den Favoritenstatus initialisieren
+    }
+
+    fun toggleFavorite() {
+        _currentPlantFavorited.value = !_currentPlantFavorited.value!!
+        _currentPlant.value?.liked = _currentPlantFavorited.value!!
+        // Hier Datenbank aktualisieren, um den Favoritenstatus ebenfalls zu speichern.
     }
 }
