@@ -42,9 +42,13 @@ class PlantLexiconDetailFragment : Fragment() {
             if (isChecked) {
                 // Wenn der ToggleButton ausgewählt ist (ausgefüllter Stern), ändere das Hintergrundbild
                 buttonView.setBackgroundResource(R.drawable.btn_fav_on)
+                viewModel.safePlantFav()
+                viewModel.likePlant()
             } else {
                 // Wenn der ToggleButton nicht ausgewählt ist (leerer Stern), ändere das Hintergrundbild
                 buttonView.setBackgroundResource(R.drawable.btn_fav_off)
+                viewModel.dislikePlant()
+                viewModel.removePlantFav()
             }
         }
     }

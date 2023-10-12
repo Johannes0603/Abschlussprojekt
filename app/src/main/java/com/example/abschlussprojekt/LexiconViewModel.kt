@@ -14,20 +14,22 @@ import kotlinx.coroutines.launch
 class LexiconViewModel(application: Application) :
     AndroidViewModel(application) {
 
-    private val _currentPlant = MutableLiveData<Plant>()
-    val inputText = MutableLiveData<String>()
-    val currentPlant: LiveData<Plant>
-        get() = _currentPlant
+    val db = getDataBase(application)
 
+    private val repository = Repository(PlantApi, db)
 
-    private val repository = Repository(PlantApi, getDataBase(application))
     val lexiconList = repository.allPlants
 
+    private val _currentPlant = MutableLiveData<Plant>()
+
+    val inputText = MutableLiveData<String>()
+
+    val favPlants = repository.favPlants
 
     private var currentPage = 1 // Startseite
 
-
-
+    val currentPlant: LiveData<Plant>
+        get() = _currentPlant
     fun getPlants(term: String) {
         viewModelScope.launch {
             // Pflanzen für die aktuelle Seite abrufen
@@ -50,4 +52,38 @@ class LexiconViewModel(application: Application) :
         }
     }
 
+    private val _isLiked = MutableLiveData<Boolean>(false)
+    val isLiked: LiveData<Boolean> get() = _isLiked
+    private val _isDisliked = MutableLiveData<Boolean>(false)
+    val isDisliked: LiveData<Boolean> get() = _isDisliked
+
+    fun likePlant() {
+
+        _currentPlant.value?.liked = true
+        _currentPlant.value?.dislike = false
+        _isLiked.value = true
+        _isDisliked.value = false
+
+    }
+    fun dislikePlant() {
+        _currentPlant.value?.liked = false
+        _currentPlant.value?.dislike = true
+        _isLiked.value = false
+        _isDisliked.value = true
+
+    }
+    fun safePlantFav(){
+        _currentPlant.value?.let {
+            viewModelScope.launch{
+                repository.plantToFav(it)
+            }
+        }
+    }
+    fun removePlantFav(){
+        _currentPlant.value?.let{
+            viewModelScope.launch{
+                _currentPlant.value?.let { repository.removePlantFav(it.id) }
+            }
+        }
+    }
 }
