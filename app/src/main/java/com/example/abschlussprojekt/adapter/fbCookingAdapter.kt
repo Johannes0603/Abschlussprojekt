@@ -33,7 +33,7 @@ class fbCookingAdapter(  private var dataSet: List<cookRecipes>,private val view
         //loadRoundImage(binding.ivLexiconList, imgUri)
 
 
-        // Hier setzen wir den Click-Listener auf das Element
+        // Hier setzen des Click-Listener auf das Element
         holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(item)
         }

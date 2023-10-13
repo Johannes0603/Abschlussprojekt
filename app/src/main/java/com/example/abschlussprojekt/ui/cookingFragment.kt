@@ -71,7 +71,9 @@ class cookingFragment : Fragment() {
         //addObserver()
         // Klick-Listener für den ImageButton hinzufügen
         adapter.setOnItemClickListener { selectedRecipe ->
-            viewModel.updateRecipeFire(selectedRecipe)
+            viewModel.updateRecipe(selectedRecipe)
+            // Setzen des ausgewählten Rezepts, vor navigation zum Details-Fragment
+            viewModel.setSelectedRecipe(selectedRecipe)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }
         binding.btnAddCook.setOnClickListener {
@@ -79,7 +81,7 @@ class cookingFragment : Fragment() {
             val newRecipe = cookRecipes()
 
             // Setzen des ausgewählten Rezepts im ViewModel auf das neue Rezept
-            viewModel.updateRecipeFire(newRecipe)
+            viewModel.updateRecipe(newRecipe)
 
             // Navigieren zum Details-Fragment (Bearbeitungsmodus)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)

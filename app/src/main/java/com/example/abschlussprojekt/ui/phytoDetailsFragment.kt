@@ -1,6 +1,7 @@
 package com.example.abschlussprojekt.ui
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +28,10 @@ class phytoDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.currentRecipe.observe(viewLifecycleOwner){
-            binding.iv1PhytoDetail.load(it.img)
-            binding.tv1NamePhytoDetail.text = it.Name
-            binding.tvInfoPhytoDetail.text = it.description
+        viewModel.currentRecipe.observe(viewLifecycleOwner){recipe ->
+            binding.ivPhytoDetail.load(recipe.img)
+            binding.tvRecipeNamePhyto.text = Editable.Factory.getInstance().newEditable(recipe.Name)
+            binding.tvRecipePhyto.text = Editable.Factory.getInstance().newEditable(recipe.description)
         }
     }
 

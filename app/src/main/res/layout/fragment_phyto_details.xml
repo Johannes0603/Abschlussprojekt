@@ -1,84 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-    <com.google.android.material.card.MaterialCardView
+    android:background="@drawable/background_phyto"
+    tools:context=".ui.cookingDetailsFragment">
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_phyto"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/iv_phytoDetail"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="81dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
-        >
+    <EditText
+        android:id="@+id/tvRecipeNamePhyto"
+        android:layout_width="200dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="106dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_phytoDetail" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_lexicon_detail"
-            tools:context=".ui.PlantLexiconDetailFragment">
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="56dp"
+        android:backgroundTint="#997DB2A2"
+        android:text="EDIT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/SAVEPhyto"
+        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipePhyto" />
 
+    <ScrollView
+        android:id="@+id/sv_tv_recipePhyto"
+        android:layout_width="300dp"
+        android:layout_height="236dp"
+        android:layout_marginTop="17dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/tvRecipeNamePhyto"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/tvRecipeNamePhyto"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecipeNamePhyto">
 
-            <ImageView
-                android:id="@+id/iv1PhytoDetail"
-                android:layout_width="324dp"
-                android:layout_height="303dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="67dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+        <EditText
+            android:id="@+id/tvRecipePhyto"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="TextView" />
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/tv1NamePhytoDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="TextView"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv1PhytoDetail" />
+    <Button
+        android:id="@+id/SAVEPhyto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="60dp"
+        android:text="SAVE"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipePhyto" />
 
-            <TextView
-                android:id="@+id/tvInfoPhytoDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv1NamePhytoDetail" />
+    <Button
+        android:id="@+id/upImgPhyto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Upload Image"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
+        app:layout_constraintStart_toEndOf="@+id/SAVEPhyto"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEdit" />
 
-            <ToggleButton
-                android:id="@+id/btnPhytLex"
-                android:layout_width="87dp"
-                android:layout_height="65dp"
-                android:layout_marginStart="164dp"
-                android:layout_marginTop="37dp"
-                android:layout_marginEnd="165dp"
-                android:background="@drawable/btn_fav_off"
-                android:checked="false"
-                android:textOff=""
-                android:textOn=""
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfoPhytoDetail" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

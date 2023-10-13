@@ -43,11 +43,11 @@ class cookingDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.selectedRecipe.observe(viewLifecycleOwner, {
+        viewModel.selectedRecipe.observe(viewLifecycleOwner, {recipe ->
             // Hier setzen der Daten in die Ansichtselemente
-            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(it.cookName)
-            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(it.zubereitung)
-            binding.imgCoverDetail.load(it.img)
+            binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(recipe.cookName)
+            binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(recipe.Zubereitung)
+            binding.imgCoverDetail.load(recipe.img)
         })
 
 // Funktion um Bild vom Gerät auszuwählen
@@ -77,7 +77,7 @@ class cookingDetailsFragment : Fragment() {
                 // Umwandeln des Snapshots in eine Klassen-Instanz und setzen der Felder
                 val updatedRecipe = snapshot.toObject(cookRecipes::class.java)
                 binding.tvRecipeName.setText(updatedRecipe?.cookName)
-                binding.tvRecipe.setText(updatedRecipe?.zubereitung)
+                binding.tvRecipe.setText(updatedRecipe?.Zubereitung)
                 if (updatedRecipe?.img != ""){
                     binding.imgCoverDetail.load(updatedRecipe?.img)
                 }
@@ -94,6 +94,14 @@ class cookingDetailsFragment : Fragment() {
         binding.tvRecipe.isEnabled = isEditing
         binding.SAVE.visibility = if (isEditing) View.VISIBLE else View.GONE
         binding.upImg.visibility = if (isEditing) View.VISIBLE else View.GONE
+
+
+        // Edit zurück zu Anzeigemodus speichern
+        if (!isEditing) {
+            val name = binding.tvRecipeName.text.toString()
+            val info = binding.tvRecipe.text.toString()
+            viewModel.updateRecipe(cookRecipes(name, info))
+        }
     }
 
     private fun setViewInDisplayMode() {
