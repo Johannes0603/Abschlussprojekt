@@ -19,12 +19,7 @@ class cookingDetailsFragment : Fragment() {
     private val viewModel: firebaseCookVM by activityViewModels()
     private lateinit var binding: FragmentCookingDetailsBinding
     private var isEditing = false // Um den Bearbeitungsmodus zu verfolgen
-    // Erstellen der GetContent-Funktion, um Bilder vom Gerät auszuwählen und anschließend ans ViewModel weiterzugeben
-   /* private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        if (uri != null) {
-            CookingViewModel.uploadImage(uri)
-        }
-    }*/
+
     // Erstellen der GetContent-Funktion, um Bilder vom Gerät auszuwählen und anschließend ans ViewModel weiterzugeben
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
