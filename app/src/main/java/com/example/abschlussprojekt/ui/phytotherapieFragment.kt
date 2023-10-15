@@ -65,24 +65,23 @@ class phytotherapieFragment : Fragment() {
     private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("RezeptePhyt").orderBy("Name", Query.Direction.ASCENDING)
-            .addSnapshotListener(object : EventListener<QuerySnapshot> {
-                override fun onEvent(
-                    value: QuerySnapshot?,
-                    error: FirebaseFirestoreException?
-                ) {
-                    if (error != null) {
-                        Log.e("FST Error", error.message.toString())
-                        return
-                    }
-                    for (dc: DocumentChange in value?.documentChanges!!) {
-                        if (dc.type == DocumentChange.Type.ADDED) {
-                            val phytoRecipe = dc.document.toObject(PhytoRecipes::class.java)
-                            PHList.add(phytoRecipe)
-                        }
-                    }
-                    adapter.notifyDataSetChanged()
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    // Handle error
+                    return@addSnapshotListener
                 }
 
-            })
+                // Clear the list before adding items
+                PHList.clear()
+                for (document in value!!.documents) {
+                    val phytoRecipe = document.toObject(PhytoRecipes::class.java)
+                    if (phytoRecipe != null) {
+                        PHList.add(phytoRecipe)
+                    }
+                }
+
+                // Notify the adapter that the data has changed
+                adapter.notifyDataSetChanged()
+            }
     }
 }

@@ -11,12 +11,9 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import coil.load
-import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.ViewModelPackage.fbPhytoVM
 import com.example.abschlussprojekt.data.model.PhytoRecipes
-import com.example.abschlussprojekt.data.model.cookRecipes
 import com.example.abschlussprojekt.databinding.FragmentPhytoDetailsBinding
-import com.google.firebase.firestore.ktx.toObjects
 
 class phytoDetailsFragment : Fragment() {
     private val viewModel: fbPhytoVM by activityViewModels()
@@ -42,11 +39,13 @@ class phytoDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Fragment beobachtet änderungen
         viewModel.currentRecipe.observe(viewLifecycleOwner) { recipe ->
+            //Bild laden
             binding.ivPhytoDetail.load(recipe.img)
+            //name und beschreibung anzeigen
             binding.tvRecipeNamePhyto.text = Editable.Factory.getInstance().newEditable(recipe.Name)
-            binding.tvRecipePhyto.text =
-                Editable.Factory.getInstance().newEditable(recipe.description)
+            binding.tvRecipePhyto.text = Editable.Factory.getInstance().newEditable(recipe.description)
         }
         // Funktion um Bild vom Gerät auszuwählen
         binding.upImgPhyto.setOnClickListener {
@@ -77,7 +76,8 @@ class phytoDetailsFragment : Fragment() {
             viewModel.updateRecipe(PhytoRecipes(Name, Info))
         }
 
-        // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
+
+          // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
         // Hier: Referenz auf Rezept wird beobachtet
         viewModel.recipeRef.addSnapshotListener { snapshot, error ->
             if (error == null && snapshot != null) {

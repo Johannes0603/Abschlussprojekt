@@ -25,6 +25,7 @@ class fbPhytoVM (application: Application) :
     val currentRecipe: LiveData<PhytoRecipes>
         get() = _currentRecipe
 
+
     fun detailCurrentRecipe(phyto: PhytoRecipes){
         _currentRecipe.value = phyto
     }
@@ -60,8 +61,10 @@ private fun setupUserEnv() {
 private fun setupNewRecipe() {
   recipeRef.set(PhytoRecipes())
 }
+    
+    //---------------------hier des mit "document()"
     fun updateRecipe(recipe: PhytoRecipes) {
-        recipeRef.update("Name", recipe.Name, "description", recipe.description)
+        recipeRef.collection("RezeptePhyt").document().update("Name", recipe.Name, "description", recipe.description)
     }
 // Speichern eines Rezepts im Firestore
 fun saveRecipe(recipe: PhytoRecipes) {
@@ -87,6 +90,8 @@ fun uploadImage(uri: Uri) {
       }
   }
 }
+
+    // TODO: umschreiben mit if-else für setzen wenn nicht vorhanden? 
 // Funktion um Url zu neue hochgeladenem Bild im Firestore upzudaten
 private fun setImage(uri: Uri) {
   recipeRef.update("img", uri.toString()).addOnFailureListener {
