@@ -2,13 +2,8 @@ package com.example.abschlussprojekt.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import coil.transform.CircleCropTransformation
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.example.abschlussprojekt.CookingViewModel
 import com.example.abschlussprojekt.R
 import com.example.abschlussprojekt.data.model.RecipeData
