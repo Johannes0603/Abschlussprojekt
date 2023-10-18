@@ -40,13 +40,16 @@ class phytoDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Fragment beobachtet änderungen
-        viewModel.currentRecipe.observe(viewLifecycleOwner) { recipe ->
+        viewModel.currentRecipe.observe(viewLifecycleOwner) { it
             //Bild laden
-            binding.ivPhytoDetail.load(recipe.img)
+            binding.ivPhytoDetail.load(it.img)
             //name und beschreibung anzeigen
-            binding.tvRecipeNamePhyto.text = Editable.Factory.getInstance().newEditable(recipe.Name)
-            binding.tvRecipePhyto.text = Editable.Factory.getInstance().newEditable(recipe.description)
+            binding.tvRecipeNamePhyto.text = it.Name
+            binding.tvRecipePhyto.text = it.description
         }
+    }
+}
+        /*
         // Funktion um Bild vom Gerät auszuwählen
         binding.upImgPhyto.setOnClickListener {
             getContent.launch("image/*")
@@ -91,7 +94,7 @@ class phytoDetailsFragment : Fragment() {
             } else {
                 Log.e("snapshot FEHLER", "hier könnte Ihr fehler stehen")
             }
-        }*/
+        }
 
     }
 
@@ -110,3 +113,5 @@ class phytoDetailsFragment : Fragment() {
             binding.upImgPhyto.visibility = View.GONE
         }
 }
+
+         */

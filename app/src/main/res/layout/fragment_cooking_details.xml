@@ -49,6 +49,7 @@
         android:focusableInTouchMode="true"
         android:text="TextView"
         android:textSize="24sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView"
         app:layout_constraintHorizontal_bias="0.497"
@@ -90,6 +91,8 @@
             android:layout_marginLeft="10dp"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:focusableInTouchMode="true"
             android:text="TextView" />
     </ScrollView>

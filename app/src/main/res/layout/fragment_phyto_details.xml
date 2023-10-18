@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-    <EditText
+    <TextView
         android:id="@+id/tvRecipeNamePhyto"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -35,23 +35,10 @@
         app:layout_constraintStart_toStartOf="@+id/iv_phytoDetail"
         app:layout_constraintTop_toBottomOf="@+id/iv_phytoDetail" />
 
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="56dp"
-        android:backgroundTint="#997DB2A2"
-        android:text="EDIT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SAVEPhyto"
-        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipePhyto" />
-
     <ScrollView
         android:id="@+id/sv_tv_recipePhyto"
-        android:layout_width="300dp"
-        android:layout_height="273dp"
+        android:layout_width="303dp"
+        android:layout_height="396dp"
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:clickable="true"
@@ -64,38 +51,17 @@
         app:layout_constraintStart_toStartOf="@+id/tvRecipeNamePhyto"
         app:layout_constraintTop_toBottomOf="@+id/tvRecipeNamePhyto">
 
-        <EditText
+        <TextView
             android:id="@+id/tvRecipePhyto"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:text="TextView" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/SAVEPhyto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="60dp"
-        android:text="SAVE"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipePhyto" />
-
-    <Button
-        android:id="@+id/upImgPhyto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Upload Image"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
-        app:layout_constraintStart_toEndOf="@+id/SAVEPhyto"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
