@@ -33,7 +33,7 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startQuiz() // Starten Sie das Quiz, unabhängig davon, ob es bereits abgeschlossen ist
+        startQuiz() // Starte Quiz, unabhängig davon, ob es bereits abgeschlossen ist
 
         // Button-Click-Listener für den Neustart des Spiels
         binding.restartButton.setOnClickListener {

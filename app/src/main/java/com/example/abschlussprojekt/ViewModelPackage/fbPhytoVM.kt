@@ -53,7 +53,7 @@ init {
 // Setzdie nötigen Werte sobald User eingeloggt ist
 private fun setupUserEnv() {
   _currentUser.value = firebaseAuth.currentUser
-  recipeRef = firebaseStore.collection("RezeptePhyt").document(firebaseAuth.currentUser?.uid!!)
+  recipeRef = firebaseStore.collection("RezeptePhyt").document()
 }
 
 

@@ -7,25 +7,42 @@
     android:background="@drawable/background_cooking_details"
     tools:context=".ui.cookingDetailsFragment">
 
-    <ImageView
-        android:id="@+id/img_cover_detail"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="80dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="220dp"
+        android:layout_height="193dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="81dp"
+        android:backgroundTint="#C98AB7ED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgCoverDetail"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <EditText
         android:id="@+id/tvRecipeName"
-        android:layout_width="200dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="98dp"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="65dp"
         android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
@@ -33,10 +50,10 @@
         android:text="TextView"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/img_cover_detail"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@+id/img_cover_detail"
-        app:layout_constraintTop_toBottomOf="@+id/img_cover_detail" />
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
     <Button
         android:id="@+id/buttonEdit"
@@ -55,7 +72,7 @@
         android:id="@+id/sv_tv_recipe"
         android:layout_width="299dp"
         android:layout_height="273dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:background="@color/white"
         android:clickable="true"
         android:fillViewport="true"
@@ -63,7 +80,6 @@
         android:focusableInTouchMode="true"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="@+id/tvRecipeName"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/tvRecipeName"
         app:layout_constraintTop_toBottomOf="@+id/tvRecipeName">
 
@@ -102,5 +118,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/SAVE"
         app:layout_constraintTop_toBottomOf="@+id/sv_tv_recipe" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

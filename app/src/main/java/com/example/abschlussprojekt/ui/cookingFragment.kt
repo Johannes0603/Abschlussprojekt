@@ -53,16 +53,19 @@ class cookingFragment : Fragment() {
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())
         recView.layoutManager = layoutManager
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
+        // Klick-Listener für den ImageButton hinzufügen
+        binding.savedFavoritesCooking.setOnClickListener {
+            // Hier zur Ziel-Fragment-Seite (FavoriteFragment) navigieren
+            findNavController().navigate(R.id.action_cookingFragment_to_favoritesFragment)
+        }
+       /* binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
-
             override fun afterTextChanged(s: Editable?) {
             }
-        })
+        })*/
         adapter = fbCookingAdapter(
             fbCookList,
             viewModel
@@ -79,10 +82,8 @@ class cookingFragment : Fragment() {
         binding.btnAddCook.setOnClickListener {
             // Erstellen eines neuen leeren Rezeptobjekts
             val newRecipe = cookRecipes()
-
             // Setzen des ausgewählten Rezepts im ViewModel auf das neue Rezept
             viewModel.updateRecipe(newRecipe)
-
             // Navigieren zum Details-Fragment (Bearbeitungsmodus)
             findNavController().navigate(R.id.action_cookingFragment_to_cookingDetailsFragment)
         }

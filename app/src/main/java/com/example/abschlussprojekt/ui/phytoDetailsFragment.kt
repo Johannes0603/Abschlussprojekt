@@ -77,7 +77,7 @@ class phytoDetailsFragment : Fragment() {
         }
 
 
-          // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
+         /* // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
         // Hier: Referenz auf Rezept wird beobachtet
         viewModel.recipeRef.addSnapshotListener { snapshot, error ->
             if (error == null && snapshot != null) {
@@ -91,7 +91,7 @@ class phytoDetailsFragment : Fragment() {
             } else {
                 Log.e("snapshot FEHLER", "hier könnte Ihr fehler stehen")
             }
-        }
+        }*/
 
     }
 

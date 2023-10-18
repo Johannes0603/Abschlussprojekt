@@ -52,6 +52,7 @@ class cookingDetailsFragment : Fragment() {
 
         }
 
+
         // Initialisieren der Ansicht im Anzeigemodus (nicht im Bearbeitungsmodus)
         setViewInDisplayMode()
 
@@ -63,7 +64,8 @@ class cookingDetailsFragment : Fragment() {
         binding.SAVE.setOnClickListener {
             val name = binding.tvRecipeName.text.toString()
             val info = binding.tvRecipe.text.toString()
-            viewModel.updateRecipe(cookRecipes(name, info))
+
+            viewModel.updateRecipe(cookRecipes(cookName = name, Zubereitung = info))
         }
 // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
         // Hier: Referenz auf Profil wird beobachtet
@@ -91,12 +93,12 @@ class cookingDetailsFragment : Fragment() {
         binding.upImg.visibility = if (isEditing) View.VISIBLE else View.GONE
 
 
-        // Edit zurück zu Anzeigemodus speichern
+       /* // Edit zurück zu Anzeigemodus speichern
         if (!isEditing) {
             val name = binding.tvRecipeName.text.toString()
             val info = binding.tvRecipe.text.toString()
-            viewModel.updateRecipe(cookRecipes(name, info))
-        }
+            viewModel.updateRecipe(cookRecipes(cookName = name, info))
+        }*/
     }
 
     private fun setViewInDisplayMode() {
