@@ -50,12 +50,11 @@ class phytotherapieFragment : Fragment() {
         // Hier wird der LinearLayoutManager hinzugefügt
         val layoutManager = LinearLayoutManager(requireContext())
         recView.layoutManager = layoutManager
-
         // Hier wird der Adapter initialisiert
         adapter = PhytoAdapter(
             PHList,
             viewModel
-        ) // Stelle sicher, dass 'PHList' und 'viewModel' korrekt sind
+        )
         recView.adapter = adapter
         eventChangeListener()
 
