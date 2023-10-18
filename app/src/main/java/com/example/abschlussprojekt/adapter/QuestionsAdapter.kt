@@ -30,6 +30,12 @@ class QuestionAdapter(
             // Bind Frage-Informationen an die Ansichtselemente im Item
             binding.questionText.text = question.questionText
 
+            // Hier wird der Zustand der Radio-Buttons zurückgesetzt
+            binding.option1.isChecked = false
+            binding.option2.isChecked = false
+            binding.option3.isChecked = false
+            binding.option4.isChecked = false
+
             // Setzt die Antwortmöglichkeiten für die RadioButtons
             binding.option1.text = question.options[0]
             binding.option2.text = question.options[1]
