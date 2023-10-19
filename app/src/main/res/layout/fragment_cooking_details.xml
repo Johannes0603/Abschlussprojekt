@@ -40,6 +40,7 @@
         android:id="@+id/tvRecipeName"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
+        app:layout_constraintWidth_min="20dp"
         android:layout_marginStart="63dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"

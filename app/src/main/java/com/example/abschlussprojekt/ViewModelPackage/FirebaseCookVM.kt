@@ -28,7 +28,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    private var recipeRef: DocumentReference? = null
+    lateinit var recipeRef: DocumentReference
 
     // Referenz auf den Firebase Storage
     private val storageRef = firebaseStorage.reference
@@ -82,8 +82,7 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
     // Updaten eines Rezepts im Firestore
 
     fun updateRecipe(recipe: cookRecipes) {
-        cookRef.set(recipe)
-        setSelectedRecipe(recipe)
+        recipeRef.set(recipe)
     }
     //setzen ausgewähltes rezept
     fun setSelectedRecipe(recipe: cookRecipes) {
@@ -109,6 +108,13 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
                         // Wenn Upload erfolgreich, speichern der Bild-Url
                         val imageUrl = urlTask.result.toString()
                         setImage(imageUrl)
+
+                        // Nachdem die Bild-URL festgelegt wurde, das Rezept aktualisieren
+                        val updatedRecipe = selectedRecipe.value
+                        updatedRecipe?.img = imageUrl
+                        if (updatedRecipe != null) {
+                            updateRecipe(updatedRecipe)
+                        }
                     } else {
                         Log.e("firebaseCookVM", "Failed to get download URL: ${urlTask.exception}")
                     }
@@ -142,6 +148,13 @@ class firebaseCookVM(application: Application) : AndroidViewModel(application) {
             .addOnFailureListener { e ->
                 Log.e("firebaseCookVM", "Fehler beim Hinzufügen des neuen Rezepts", e)
             }
+    }
+    // Funktion zum Abrufen der Bild-URL für ein Rezept
+    fun getRecipeImageURL(recipe: cookRecipes): String {
+        if (recipe.img.isNotEmpty()) {
+            return recipe.img
+        }
+        return ""
     }
 
     //-------------------------------------suche---------------------------------------

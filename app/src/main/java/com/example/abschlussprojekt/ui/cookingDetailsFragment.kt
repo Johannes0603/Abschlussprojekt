@@ -38,11 +38,15 @@ class cookingDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.selectedRecipe.observe(viewLifecycleOwner, {recipe ->
+        viewModel.selectedRecipe.observe(viewLifecycleOwner, { recipe ->
             // Hier setzen der Daten in die Ansichtselemente
             binding.tvRecipeName.text = Editable.Factory.getInstance().newEditable(recipe.cookName)
             binding.tvRecipe.text = Editable.Factory.getInstance().newEditable(recipe.Zubereitung)
-            binding.imgCoverDetail.load(recipe.img)
+
+            val imageUrl = viewModel.getRecipeImageURL(recipe)
+            if (imageUrl.isNotEmpty()) {
+                binding.imgCoverDetail.load(imageUrl)
+            }
         })
 
 // Funktion um Bild vom Gerät auszuwählen
@@ -69,7 +73,7 @@ class cookingDetailsFragment : Fragment() {
         }
 // Snapshot Listener: Hört auf Änderungen in dem Firestore Document, das beobachtet wird
         // Hier: Referenz auf Profil wird beobachtet
-        viewModel.cookRef.addSnapshotListener { snapshot, error ->
+        viewModel.recipeRef.addSnapshotListener { snapshot, error ->
             if (error == null && snapshot != null){
                 // Umwandeln des Snapshots in eine Klassen-Instanz und setzen der Felder
                 val updatedRecipe = snapshot.toObject(cookRecipes::class.java)
@@ -78,7 +82,7 @@ class cookingDetailsFragment : Fragment() {
                 if (updatedRecipe?.img != ""){
                     binding.imgCoverDetail.load(updatedRecipe?.img)
                 }
-            }else {
+            } else {
                 Log.e("snapshot FEHLER", "hier könnte Ihr fehler stehen")
             }
         }
